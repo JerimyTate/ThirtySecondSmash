@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.facebook.FacebookSdk;
+
 
 /**
  * Created by JFaucette on 11/23/15.
