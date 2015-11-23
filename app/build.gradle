@@ -19,8 +19,13 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     testCompile 'junit:junit:4.12'
+    compile 'com.facebook.android:facebook-android-sdk:4.7.0'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
     compile 'com.parse.bolts:bolts-android:1.+'
