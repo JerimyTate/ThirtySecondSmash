@@ -1,0 +1,2 @@
+# ThirtySecondSmash
+Smash that button!
