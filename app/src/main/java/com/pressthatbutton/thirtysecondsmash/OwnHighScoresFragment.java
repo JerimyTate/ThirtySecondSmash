@@ -9,10 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.parse.ParseQuery;
-import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
-
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -30,9 +26,6 @@ public class OwnHighScoresFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private LayoutInflater inflater;
-    private ParseQuery<Score> scoreAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,7 +63,7 @@ public class OwnHighScoresFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment]
         return inflater.inflate(R.layout.fragment_own_high_scores, container, false);
     }
 
@@ -78,30 +71,6 @@ public class OwnHighScoresFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    private class ScoreAdapter extends ParseQueryAdapter<Score> {
-        public ScoreAdapter(Context context, ParseQueryAdapter.QueryFactor<Score> queryFactor) {
-            super(context, queryFactor);
-        }
-
-        @Override
-        public View getView(Score score, View view, ViewGroup parent) {
-            ViewHolder holder;
-            if (view == null) {
-                view = inflate.inflate(R.layout.list_item_score, parent, false);
-                holder = new ViewHolder();
-                holder.score = (TextView) view.findViewById(R.id.txtScore);
-                view.setTag(holder);
-            } else {
-                holder = (ViewHolder) view.getTag();
-            }
-            TextView txtScore = holder.score;
-            txtScore.setText(score.getScore());
-            TextView txtUserID = (TextView) view.findViewById(R.id.txtScore);
-            txtUserID.setText(user.getUserID());
-            return view;
         }
     }
 
