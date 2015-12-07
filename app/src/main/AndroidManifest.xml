@@ -21,11 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".PlayActivity"></activity>
-=======
-        <activity
-            android:name=".GameActivity"
+
+        <activity android:name=".GameActivity"
             android:label="@string/title_activity_game"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -33,7 +31,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
         </activity>
->>>>>>> fbd45481cad49a872f0fd06f6289178d30ee2fa6
     </application>
 
 </manifest>
