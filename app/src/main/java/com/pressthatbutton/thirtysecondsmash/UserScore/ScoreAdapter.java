@@ -17,7 +17,7 @@ public class ScoreAdapter extends ParseQueryAdapter<Score>{
     public View getView(Score score, View view, ViewGroup parent) {
         ViewHolder holder;
         if(view==null){
-            view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_score, parent,false);
+            view = inflate.inflate(R.layout.list_item_score, parent,false);
             holder = new ViewHolder();
             holder.score = (TextView) view.findViewById(R.id.txtScore);
             view.setTag(holder);
@@ -26,7 +26,7 @@ public class ScoreAdapter extends ParseQueryAdapter<Score>{
         }
         TextView txtScore= holder.score;
         txtScore.setText(score.getScore());
-        TextView txtUserID= (TextView)convertView.findViewById(R.id.txtUserID_user);
+        TextView txtUserID= (TextView)view.findViewById(R.id.txtScore);
         txtUserID.setText(user.getUserID());
         return view;
     }
