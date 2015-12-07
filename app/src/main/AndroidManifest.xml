@@ -21,14 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayActivity"></activity>
-<<<<<<< HEAD
-        <activity
-            android:name=".GameActivity"
-=======
+        <activity android:name=".PlayActivity"/>
 
         <activity android:name=".GameActivity"
->>>>>>> refs/remotes/JerimyTate/master
             android:label="@string/title_activity_game"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
