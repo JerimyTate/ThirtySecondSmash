@@ -8,10 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Countdown extends Fragment {
 
     private TextView countdown_number;
@@ -19,7 +15,6 @@ public class Countdown extends Fragment {
     public Countdown() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
