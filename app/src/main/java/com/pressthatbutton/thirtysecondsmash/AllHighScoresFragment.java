@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +28,9 @@ public class AllHighScoresFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    public Button btnAllToMain;
+    public Button btnAllToOwn;
 
     public AllHighScoresFragment() {
         // Required empty public constructor

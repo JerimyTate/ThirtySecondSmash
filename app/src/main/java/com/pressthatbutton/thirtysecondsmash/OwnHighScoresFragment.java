@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -28,6 +29,9 @@ public class OwnHighScoresFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    public Button btnOwnToMain;
+    public Button btnOwnToAll;
 
     public OwnHighScoresFragment() {
         // Required empty public constructor
