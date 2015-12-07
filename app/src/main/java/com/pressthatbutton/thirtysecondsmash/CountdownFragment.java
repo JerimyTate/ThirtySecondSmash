@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class Countdown extends Fragment {
+public class CountdownFragment extends Fragment {
 
     private TextView countdown_number;
 
-    public Countdown() {
+    public CountdownFragment() {
         // Required empty public constructor
     }
 
