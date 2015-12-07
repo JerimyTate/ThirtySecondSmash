@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.ParseQuery;
+import com.parse.ParseException;
+import com.parse.ParseQueryAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
 
@@ -65,12 +68,15 @@ public class OwnHighScoresFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+/*        ParseQueryAdapter<Score> scoreAdapter = new ParseQueryAdapter<Score>();
+        ListView ownScoreListView = (ListView) getView().findViewById(R.id.own_score_list_view);
+        ownScoreListView.setAdapter(scoreAdapter);*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment]
         return inflater.inflate(R.layout.fragment_own_high_scores, container, false);
     }
 
@@ -81,7 +87,7 @@ public class OwnHighScoresFragment extends Fragment {
         }
     }
 
-    private class ScoreAdapter extends ParseQueryAdapter<Score> {
+/*    private class ScoreAdapter extends ParseQueryAdapter<Score> {
         public ScoreAdapter(Context context, ParseQueryAdapter.QueryFactor<Score> queryFactor) {
             super(context, queryFactor);
         }
@@ -103,7 +109,7 @@ public class OwnHighScoresFragment extends Fragment {
             txtUserID.setText(user.getUserID());
             return view;
         }
-    }
+    }*/
 
     private static class ViewHolder{
         TextView score;

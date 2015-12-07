@@ -2,8 +2,10 @@ package com.pressthatbutton.thirtysecondsmash;
 
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,6 @@ import android.widget.TextView;
 public class CountdownFragment extends Fragment {
 
     private TextView countdown_number;
-    private int counter;
 
     public CountdownFragment() {
         // Required empty public constructor
@@ -28,7 +29,17 @@ public class CountdownFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        countdown_number = (TextView)getView().findViewById(R.id.txt_countdown_number);
+        new CountDownTimer(30000, 1000) {
+            //30 Seconds
+            public void onTick(long millisUntilFinished) {
+                countdown_number.setText(""+millisUntilFinished / 1000);
+            }
 
+            public void onFinish() {
+                countdown_number.setText("End");
+            }
+        }.start();
     }
 
     /**
