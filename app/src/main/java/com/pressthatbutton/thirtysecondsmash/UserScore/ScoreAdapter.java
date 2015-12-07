@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.pressthatbutton.thirtysecondsmash.R;
 
-public class ScoreAdapter extends ParseQueryAdapter<Score>{
+private class ScoreAdapter extends ParseQueryAdapter<Score>{
     public ScoreAdapter(Context context, ParseQueryAdapter.QueryFactor<Score> queryFactor) {
         super(context, queryFactor);
     }

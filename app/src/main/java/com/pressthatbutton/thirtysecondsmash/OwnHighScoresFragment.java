@@ -7,6 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.parse.ParseQuery;
+import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
 
 /**
@@ -26,6 +30,9 @@ public class OwnHighScoresFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private LayoutInflater inflater;
+    private ParseQuery<Score> scoreAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,6 +79,34 @@ public class OwnHighScoresFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    private class ScoreAdapter extends ParseQueryAdapter<Score> {
+        public ScoreAdapter(Context context, ParseQueryAdapter.QueryFactor<Score> queryFactor) {
+            super(context, queryFactor);
+        }
+
+        @Override
+        public View getView(Score score, View view, ViewGroup parent) {
+            ViewHolder holder;
+            if (view == null) {
+                view = inflate.inflate(R.layout.list_item_score, parent, false);
+                holder = new ViewHolder();
+                holder.score = (TextView) view.findViewById(R.id.txtScore);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+            TextView txtScore = holder.score;
+            txtScore.setText(score.getScore());
+            TextView txtUserID = (TextView) view.findViewById(R.id.txtScore);
+            txtUserID.setText(user.getUserID());
+            return view;
+        }
+    }
+
+    private static class ViewHolder{
+        TextView score;
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class CountdownFragment extends Fragment {
 
     private TextView countdown_number;
+    private int counter;
 
     public CountdownFragment() {
         // Required empty public constructor
