@@ -1,12 +1,47 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.pressthatbutton.thirtysecondsmash.OwnHighScoresFragment">
 
-    <ListView
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/own_score_list_view"></ListView>
+        android:background="@color/colorLightOlive"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:textColor="#fff"
+        android:text="Your High Scores"/>
+    <ListView
+        android:id="@+id/own_score_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"></ListView>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOwntoMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightRed"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:text="Back to Main"/>
+        <Button
+            android:id="@+id/btnOwntoAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightBlue"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:text="All High Scores"/>
+    </LinearLayout>
+</LinearLayout>
