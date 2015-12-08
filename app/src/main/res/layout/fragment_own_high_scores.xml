@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pressthatbutton.thirtysecondsmash.OwnHighScoresFragment">
+    tools:context="com.pressthatbutton.thirtysecondsmash.OwnHighScoresFragment"
+    android:id="@+id/OwnHighScores_Fragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnOwntoMain"
+            android:id="@+id/btnOwnToMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorLightRed"
@@ -36,7 +37,7 @@
             android:textColor="#fff"
             android:text="Back to Main"/>
         <Button
-            android:id="@+id/btnOwntoAll"
+            android:id="@+id/btnOwnToAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorLightBlue"

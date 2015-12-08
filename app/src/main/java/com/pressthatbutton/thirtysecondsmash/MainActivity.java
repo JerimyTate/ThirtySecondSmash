@@ -5,9 +5,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+<<<<<<< HEAD
+import android.widget.Button;
+=======
 import android.view.View;
+>>>>>>> 7bb08d424bde4877372fa9fa75f2e61f8bc0c9e6
 
 public class MainActivity extends AppCompatActivity {
+
+    public Button btnStartGame;
+    public Button btnMainToOwn;
+    public Button btnMainToAll;
+    public Button btnHelp;
+    public Button btnChangeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

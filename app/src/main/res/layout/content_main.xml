@@ -19,12 +19,12 @@
         android:src="@drawable/thirtysecsmashlogo_360"
         android:layout_margin="10dp"/>
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtHomeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_marginTop="20dp"
-        android:text="30 Second Smash"
+        android:text="@string/title"
         android:textSize="30dp"
         android:textAlignment="center"
         android:paddingBottom="10dp"/>
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btnMaintoAll"
+            android:id="@+id/btnMainToAll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -55,7 +55,7 @@
             android:textColor="#fff"
             android:background="@color/colorLightBlue"/>
         <Button
-            android:id="@+id/btnMaintoOwn"
+            android:id="@+id/btnMainToOwn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
