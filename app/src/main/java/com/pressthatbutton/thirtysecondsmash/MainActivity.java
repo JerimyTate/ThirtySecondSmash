@@ -3,11 +3,13 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+<<<<<<< HEAD
 import android.widget.Button;
+=======
+import android.view.View;
+>>>>>>> 7bb08d424bde4877372fa9fa75f2e61f8bc0c9e6
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void sendMessage(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, GameActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

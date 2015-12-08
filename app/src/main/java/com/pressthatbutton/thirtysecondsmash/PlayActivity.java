@@ -21,5 +21,7 @@ public class PlayActivity extends AppCompatActivity implements AllHighScoresFrag
     }
 
     @Override
-    public void itemClicked(String city)
+    public void itemClicked(String city){
+        //
+    }
 }

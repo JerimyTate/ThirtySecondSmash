@@ -36,6 +36,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="20sp"
+        android:onClick="sendMessage"
         android:text="Start!"
         android:textColor="#fff"
         android:background="@color/colorLightOlive" />
