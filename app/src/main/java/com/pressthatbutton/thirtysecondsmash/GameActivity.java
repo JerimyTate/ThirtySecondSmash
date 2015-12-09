@@ -30,10 +30,5 @@ public class GameActivity extends AppCompatActivity {
                     }.start();
     }
 
-
-    public void CountdownFragment() {
-        // Required empty public constructor
-    }
-
-
+    
 }
