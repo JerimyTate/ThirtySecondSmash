@@ -3,9 +3,6 @@
     <string name="title">30 Second Smash</string>
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- Login Screen Text? -->
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_game">GameActivity</string>
