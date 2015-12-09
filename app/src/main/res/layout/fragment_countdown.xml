@@ -3,24 +3,5 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorDarkGreen"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:text="Seconds Remaining:" />
-        <TextView
-            android:id="@+id/txt_countdown_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorLightGreen"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            android:text="30"/>
-    </LinearLayout>
+
 </FrameLayout>

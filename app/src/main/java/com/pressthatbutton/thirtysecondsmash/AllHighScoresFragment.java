@@ -25,20 +25,20 @@ public class AllHighScoresFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_all_high_scores);
-
-        ListView listView = (ListView)view.findViewById(R.id.all_score_list_view);
-
-        List<String> places = Arrays.asList("wer","werr", "oer");
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,places);
-        listView.setAdapter(arrayAdapter);
-        return view;
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        View view = inflater.inflate(R.layout.fragment_all_high_scores);
+//
+//        ListView listView = (ListView)view.findViewById(R.id.all_score_list_view);
+//
+//        List<String> places = Arrays.asList("wer","werr", "oer");
+//
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,places);
+//        listView.setAdapter(arrayAdapter);
+//        return view;
+//    }
 
     public interface ListFragmentInteractionListener {
         // TODO: Update argument type and name

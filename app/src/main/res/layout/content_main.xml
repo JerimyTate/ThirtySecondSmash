@@ -10,7 +10,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
 
     <ImageView
@@ -52,6 +51,7 @@
             android:layout_weight="1"
             android:text="Your High Scores"
             android:layout_margin="3dp"
+            android:onClick="showAllHighScores"
             android:textColor="#fff"
             android:background="@color/colorLightBlue"/>
         <Button
