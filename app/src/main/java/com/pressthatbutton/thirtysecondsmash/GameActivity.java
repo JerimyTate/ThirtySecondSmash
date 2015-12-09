@@ -14,8 +14,6 @@ public class GameActivity extends AppCompatActivity {
     private String _stringVal;
     private Button increaseCount;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,32 +21,25 @@ public class GameActivity extends AppCompatActivity {
         increaseCount = (Button)findViewById(R.id.btnPlusOne);
 
         countdown_number = (TextView)findViewById(R.id.txt_countdown_number);
-            new CountDownTimer(30000, 1000) {
-                  //30 Seconds
-                            public void onTick(long millisUntilFinished) {
-                               countdown_number.setText(""+millisUntilFinished / 1000);
-                          }
-
-                             public void onFinish() {
-                               countdown_number.setText("End");
-                           }
-                    }.start();
-
+        new CountDownTimer(30000, 1000) {
+            //30 Seconds
+            public void onTick(long millisUntilFinished) {
+                countdown_number.setText(""+millisUntilFinished / 1000);
+            }
+            public void onFinish() {
+                countdown_number.setText("End");
+            }
+        }.start();
 
         //beginnings of an incrementing counter
         increaseCount.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                Log.d("src", "Increasing value...");
-                _counter++;
-                _stringVal = Integer.toString(_counter);
+            Log.d("src", "Increasing value...");
+            _counter++;
+            _stringVal = Integer.toString(_counter);
             }
         });
-
-
     }
-
-
 }

@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     public Button btnStartGame;
     public Button btnMainToOwn;
     public Button btnMainToAll;
-    public Button btnHelp;
+    public Button btnMainToHelp;
     public Button btnChangeName;
 
     @Override
@@ -20,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnStartGame = (Button)findViewById(R.id.btnStartGame);
+
+        btnMainToOwn = (Button)findViewById(R.id.btnMainToOwn);
+
+        btnMainToAll = (Button)findViewById(R.id.btnMainToAll);
+
+        btnMainToHelp = (Button)findViewById(R.id.btnMainToHelp);
+
+        btnChangeName = (Button)findViewById(R.id.btnChangeName);
     }
 
     @Override
