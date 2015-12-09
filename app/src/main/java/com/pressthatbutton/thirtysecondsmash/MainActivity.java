@@ -50,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Launch High All High Scores when clicked
+    //Launch Instructions when pressed
     public void playerInstructions(View view)
     {
-        Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
+        Intent intent = new Intent(MainActivity.this, PlayerInstructions.class);
         startActivity(intent);
     }
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
