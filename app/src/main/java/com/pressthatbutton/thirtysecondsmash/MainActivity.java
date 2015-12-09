@@ -30,18 +30,32 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void sendMessage(View view)
+    //Launch Game when clicked
+    public void startGame(View view)
     {
         Intent intent = new Intent(MainActivity.this, GameActivity.class);
         startActivity(intent);
     }
 
+    //Launch High All High Scores when clicked
     public void showAllHighScores(View view)
     {
         Intent intent = new Intent(MainActivity.this, ShowAllHighScores.class);
         startActivity(intent);
     }
+    //Launch High All High Scores when clicked
+    public void showMyHighScores(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
+        startActivity(intent);
+    }
 
+    //Launch High All High Scores when clicked
+    public void playerInstructions(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

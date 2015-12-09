@@ -35,7 +35,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="20sp"
-        android:onClick="sendMessage"
+        android:onClick="startGame"
         android:text="Start!"
         android:textColor="#fff"
         android:background="@color/colorLightOlive" />
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:text="Your High Scores"
             android:layout_margin="3dp"
-            android:onClick="showAllHighScores"
+            android:onClick="showMyHighScores"
             android:textColor="#fff"
             android:background="@color/colorLightBlue"/>
         <Button
@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="All High Scores"
+            android:onClick="showAllHighScores"
             android:layout_margin="3dp"
             android:textColor="#fff"
             android:background="@color/colorLightBlue"/>
