@@ -17,6 +17,8 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView _value;
 
+    public int GameTime=5000;
+    public int DecrementRate=1000;
 
 
     @Override
@@ -29,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
 
         _value = (TextView) findViewById(R.id.txt_game_score);
         countdown_number = (TextView)findViewById(R.id.txt_countdown_number);
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(GameTime, DecrementRate) {
             //30 Seconds
             public void onTick(long millisUntilFinished) {
                 countdown_number.setText(""+millisUntilFinished / 1000);
@@ -92,4 +94,11 @@ public class GameActivity extends AppCompatActivity {
         decreaseCount.setVisibility(View.GONE);
 
     }
+
+    public void GameOver(){
+
+        //load Post Game Activity
+
+    }
+
 }
