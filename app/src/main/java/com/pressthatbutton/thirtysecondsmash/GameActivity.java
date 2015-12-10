@@ -84,8 +84,9 @@ public class GameActivity extends AppCompatActivity{
         _counter++;
         _stringVal = Integer.toString(_counter);
         _value.setText(_stringVal);
-        plusOneSound.load(this, R.raw.plusone, 1);
+        plusOneSound.play(plusOneID,1,1,1,0,1);
     }
+
     public void decrementScore(){
 
         _counter--;
@@ -109,9 +110,6 @@ public class GameActivity extends AppCompatActivity{
 
     }
 
-
-    public void playPlusOne(View view){plusOneSound.play(plusOneID,1,1,1,0,1);
-    }
 
     public void GameOver(){
 

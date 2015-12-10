@@ -100,7 +100,6 @@
         android:textColor="#fff"
         android:padding="10sp"
         android:textSize="50sp"
-        android:onClick="playPlusOne"
         android:text="+1"/>
 
     <Button
