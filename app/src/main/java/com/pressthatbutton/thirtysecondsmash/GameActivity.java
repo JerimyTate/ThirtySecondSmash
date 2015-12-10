@@ -13,6 +13,8 @@ public class GameActivity extends AppCompatActivity {
     public int _counter=0;
     private String _stringVal;
     private Button increaseCount;
+    private Button decreaseCount;
+
     private TextView _value;
 
 
@@ -21,7 +23,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         increaseCount = (Button)findViewById(R.id.btnPlusOne);
+        decreaseCount = (Button)findViewById(R.id.btnMinusOne);
+
         _value = (TextView) findViewById(R.id.txt_game_score);
         countdown_number = (TextView)findViewById(R.id.txt_countdown_number);
         new CountDownTimer(5000, 1000) {
@@ -39,16 +44,25 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-            _value = (TextView) findViewById(R.id.txt_game_score);
+                _value = (TextView) findViewById(R.id.txt_game_score);
                 if(countdown_number.getText()!="End") {
                     incrementScore();
-
                 }
-
-
-
             }
-        });
+        }
+        );
+
+        decreaseCount.setOnClickListener(new View.OnClickListener() {
+
+             @Override
+             public void onClick(View v) {
+                 _value = (TextView) findViewById(R.id.txt_game_score);
+                 if(countdown_number.getText()!="End") {
+                     decrementScore();
+                 }
+             }
+         }
+        );
     }
 
     public void incrementScore(){
@@ -56,7 +70,6 @@ public class GameActivity extends AppCompatActivity {
         _counter++;
         _stringVal = Integer.toString(_counter);
         _value.setText(_stringVal);
-
     }
     public void decrementScore(){
 
@@ -66,5 +79,17 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    public void switchModes(){
 
+        increaseCount.setVisibility(View.GONE);
+        decreaseCount.setVisibility(View.VISIBLE);
+
+    }
+
+    public void switchBack(){
+
+        increaseCount.setVisibility(View.VISIBLE);
+        decreaseCount.setVisibility(View.GONE);
+
+    }
 }
