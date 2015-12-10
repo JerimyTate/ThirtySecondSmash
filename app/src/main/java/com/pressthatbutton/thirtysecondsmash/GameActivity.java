@@ -16,7 +16,11 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity{
 
     SoundPool plusOneSound;
+    SoundPool minusOneSound;
+
     int plusOneID;
+    int minusOneID;
+
 
     private TextView countdown_number;
     public int _counter=0;
@@ -39,7 +43,11 @@ public class GameActivity extends AppCompatActivity{
         increaseCount = (Button)findViewById(R.id.btnPlusOne);
         decreaseCount = (Button)findViewById(R.id.btnMinusOne);
         plusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
+        minusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
+
         plusOneID=plusOneSound.load(this, R.raw.plusone,1);
+        minusOneID=minusOneSound.load(this, R.raw.minusone,1);
+
 
         _value = (TextView) findViewById(R.id.txt_game_score);
         countdown_number = (TextView)findViewById(R.id.txt_countdown_number);
@@ -68,14 +76,14 @@ public class GameActivity extends AppCompatActivity{
 
         decreaseCount.setOnClickListener(new View.OnClickListener() {
 
-             @Override
-             public void onClick(View v) {
-                 _value = (TextView) findViewById(R.id.txt_game_score);
-                 if(countdown_number.getText()!="End") {
-                     decrementScore();
-                 }
-             }
-         }
+                                             @Override
+                                             public void onClick(View v) {
+                                                 _value = (TextView) findViewById(R.id.txt_game_score);
+                                                 if (countdown_number.getText() != "End") {
+                                                     decrementScore();
+                                                 }
+                                             }
+                                         }
         );
     }
 
@@ -92,6 +100,8 @@ public class GameActivity extends AppCompatActivity{
         _counter--;
         _stringVal = Integer.toString(_counter);
         _value.setText(_stringVal);
+        minusOneSound.play(minusOneID,1,1,1,0,1);
+
 
     }
 
