@@ -1,5 +1,10 @@
 package com.pressthatbutton.thirtysecondsmash;
 
+import android.content.DialogInterface;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -8,23 +13,45 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity{
+
+    SoundPool plusOneSound;
+    SoundPool minusOneSound;
+
+    int plusOneID;
+    int minusOneID;
+
+
     private TextView countdown_number;
     public int _counter=0;
     private String _stringVal;
     private Button increaseCount;
+    private Button decreaseCount;
+
     private TextView _value;
 
+    //variables to load game length
+    public int GameTime=5000;
+    public int DecrementRate=1000;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        increaseCount = (Button)findViewById(R.id.btnPlusOne);
 
+        increaseCount = (Button)findViewById(R.id.btnPlusOne);
+        decreaseCount = (Button)findViewById(R.id.btnMinusOne);
+        plusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
+        minusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
+
+        plusOneID=plusOneSound.load(this, R.raw.plusone,1);
+        minusOneID=minusOneSound.load(this, R.raw.minusone,1);
+
+
+        _value = (TextView) findViewById(R.id.txt_game_score);
         countdown_number = (TextView)findViewById(R.id.txt_countdown_number);
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(GameTime, DecrementRate) {
             //30 Seconds
             public void onTick(long millisUntilFinished) {
                 countdown_number.setText(""+millisUntilFinished / 1000);
@@ -39,17 +66,65 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-            _value = (TextView) findViewById(R.id.txt_game_score);
+                _value = (TextView) findViewById(R.id.txt_game_score);
                 if(countdown_number.getText()!="End") {
-
-                    _counter++;
-                    _stringVal = Integer.toString(_counter);
-                    _value.setText(_stringVal);
+                    incrementScore();
                 }
-
-
-
             }
-        });
+        }
+        );
+
+        decreaseCount.setOnClickListener(new View.OnClickListener() {
+
+                                             @Override
+                                             public void onClick(View v) {
+                                                 _value = (TextView) findViewById(R.id.txt_game_score);
+                                                 if (countdown_number.getText() != "End") {
+                                                     decrementScore();
+                                                 }
+                                             }
+                                         }
+        );
     }
+
+    public void incrementScore(){
+
+        _counter++;
+        _stringVal = Integer.toString(_counter);
+        _value.setText(_stringVal);
+        plusOneSound.play(plusOneID,1,1,1,0,1);
+    }
+
+    public void decrementScore(){
+
+        _counter--;
+        _stringVal = Integer.toString(_counter);
+        _value.setText(_stringVal);
+        minusOneSound.play(minusOneID,1,1,1,0,1);
+
+
+    }
+
+    //sets decrease button to visible and increase button to visible
+    public void switchModes(){
+
+        increaseCount.setVisibility(View.GONE);
+        decreaseCount.setVisibility(View.VISIBLE);
+
+    }
+    //sets increase button visible and decrease invisible
+    public void switchBack(){
+
+        increaseCount.setVisibility(View.VISIBLE);
+        decreaseCount.setVisibility(View.GONE);
+
+    }
+
+
+    public void GameOver(){
+
+        //load Post Game Activity
+
+    }
+
 }

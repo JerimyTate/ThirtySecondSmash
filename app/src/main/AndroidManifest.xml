@@ -31,8 +31,9 @@
                 android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
         </activity>
         <activity android:name=".ShowAllHighScores" />
-        <activity android:name=".ShowOwnHighScores"></activity>
-        <activity android:name=".PlayerInstructions"></activity>
+        <activity android:name=".ShowOwnHighScores" />
+        <activity android:name=".PlayerInstructions" />
+        <activity android:name=".PostGameActivity"></activity>
     </application>
 
 </manifest>
