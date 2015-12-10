@@ -2,6 +2,7 @@ package com.pressthatbutton.thirtysecondsmash;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,5 +20,11 @@ public class PlayerInstructions extends AppCompatActivity {
         txtInstruction1 = (TextView)findViewById(R.id.txt_instructions_1);
         txtInstruction2 = (TextView)findViewById(R.id.txt_instructions_2);
         btnHelpToMain = (Button)findViewById(R.id.btnHelpToMain);
+        btnHelpToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+            }
+        });
     }
 }

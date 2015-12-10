@@ -2,6 +2,8 @@ package com.pressthatbutton.thirtysecondsmash;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.Button;
@@ -21,14 +23,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnStartGame = (Button)findViewById(R.id.btnStartGame);
+        btnStartGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame(v);
+            }
+        });
 
         btnMainToOwn = (Button)findViewById(R.id.btnMainToOwn);
+        btnMainToOwn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMyHighScores(v);
+            }
+        });
 
         btnMainToAll = (Button)findViewById(R.id.btnMainToAll);
+        btnMainToAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAllHighScores(v);
+            }
+        });
 
         btnMainToHelp = (Button)findViewById(R.id.btnMainToHelp);
+        btnMainToHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playerInstructions(v);
+            }
+        });
 
         btnChangeName = (Button)findViewById(R.id.btnChangeName);
+        btnChangeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showChangeNameDialog();
+            }
+        });
     }
 
     @Override
@@ -65,4 +97,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Launch Change Name Dialog
+    public void showChangeNameDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ChangeNameDialogFragment newFragment = new ChangeNameDialogFragment();
+
+        newFragment.show(fragmentManager, "ChangeNameDialog");
+    }
 }
