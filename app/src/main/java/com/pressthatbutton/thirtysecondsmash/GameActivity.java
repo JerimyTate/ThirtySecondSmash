@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class GameActivity extends AppCompatActivity{
     SoundPool plusOneSound;
     SoundPool minusOneSound;
@@ -66,6 +68,18 @@ public class GameActivity extends AppCompatActivity{
                 _value = (TextView) findViewById(R.id.txt_game_score);
                 if(countdown_number.getText()!="End") {
                     incrementScore();
+                    if(ThreadLocalRandom.current().nextInt(0, 9 + 1)==0)
+                    {
+                        switchModes();
+                        try {
+                            Thread.sleep(1000);                 //1000 milliseconds is one second.
+                        } catch(InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                        }
+                        switchBack();
+
+                    }
+
                 }
             }
         }
