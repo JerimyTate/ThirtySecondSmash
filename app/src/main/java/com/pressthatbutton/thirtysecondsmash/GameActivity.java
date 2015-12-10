@@ -22,7 +22,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         increaseCount = (Button)findViewById(R.id.btnPlusOne);
-
+        _value = (TextView) findViewById(R.id.txt_game_score);
         countdown_number = (TextView)findViewById(R.id.txt_countdown_number);
         new CountDownTimer(5000, 1000) {
             //30 Seconds
@@ -41,10 +41,8 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
             _value = (TextView) findViewById(R.id.txt_game_score);
                 if(countdown_number.getText()!="End") {
+                    incrementScore();
 
-                    _counter++;
-                    _stringVal = Integer.toString(_counter);
-                    _value.setText(_stringVal);
                 }
 
 
@@ -52,4 +50,21 @@ public class GameActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void incrementScore(){
+
+        _counter++;
+        _stringVal = Integer.toString(_counter);
+        _value.setText(_stringVal);
+
+    }
+    public void decrementScore(){
+
+        _counter--;
+        _stringVal = Integer.toString(_counter);
+        _value.setText(_stringVal);
+
+    }
+
+
 }
