@@ -71,34 +71,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Launch Game when clicked
-    public void StartGame(View view)
+    protected void StartGame(View view)
     {
         Intent intent = new Intent(MainActivity.this, GameActivity.class);
         startActivity(intent);
     }
 
     //Launch High All High Scores when clicked
-    public void ShowAllHighScores(View view)
+    protected void ShowAllHighScores(View view)
     {
         Intent intent = new Intent(MainActivity.this, ShowAllHighScores.class);
         startActivity(intent);
     }
-    //Launch High All High Scores when clicked
-    public void ShowMyHighScores(View view)
+    //Launch High Own High Scores when clicked
+    protected void ShowMyHighScores(View view)
     {
         Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
         startActivity(intent);
     }
 
     //Launch Instructions when pressed
-    public void PlayerInstructions(View view)
+    protected void PlayerInstructions(View view)
     {
         Intent intent = new Intent(MainActivity.this, PlayerInstructions.class);
         startActivity(intent);
     }
 
     //Launch Change Name Dialog
-    public void ShowChangeNameDialog() {
+    protected void ShowChangeNameDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         ChangeNameDialogFragment newFragment = new ChangeNameDialogFragment();
 
