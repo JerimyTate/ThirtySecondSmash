@@ -14,13 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity{
-
     SoundPool plusOneSound;
     SoundPool minusOneSound;
 
     int plusOneID;
     int minusOneID;
-
 
     private TextView countdown_number;
     public int _counter=0;
@@ -33,7 +31,6 @@ public class GameActivity extends AppCompatActivity{
     //variables to load game length
     public int GameTime=5000;
     public int DecrementRate=1000;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,20 +72,17 @@ public class GameActivity extends AppCompatActivity{
         );
 
         decreaseCount.setOnClickListener(new View.OnClickListener() {
-
-                                             @Override
-                                             public void onClick(View v) {
-                                                 _value = (TextView) findViewById(R.id.txt_game_score);
-                                                 if (countdown_number.getText() != "End") {
-                                                     decrementScore();
-                                                 }
-                                             }
-                                         }
-        );
+            @Override
+            public void onClick(View v) {
+                 _value = (TextView) findViewById(R.id.txt_game_score);
+                 if (countdown_number.getText() != "End") {
+                     decrementScore();
+                 }
+            }
+         });
     }
 
     public void incrementScore(){
-
         _counter++;
         _stringVal = Integer.toString(_counter);
         _value.setText(_stringVal);
@@ -96,35 +90,25 @@ public class GameActivity extends AppCompatActivity{
     }
 
     public void decrementScore(){
-
         _counter--;
         _stringVal = Integer.toString(_counter);
         _value.setText(_stringVal);
         minusOneSound.play(minusOneID,1,1,1,0,1);
-
-
     }
 
     //sets decrease button to visible and increase button to visible
     public void switchModes(){
-
         increaseCount.setVisibility(View.GONE);
         decreaseCount.setVisibility(View.VISIBLE);
-
     }
     //sets increase button visible and decrease invisible
     public void switchBack(){
-
         increaseCount.setVisibility(View.VISIBLE);
         decreaseCount.setVisibility(View.GONE);
-
     }
 
-
     public void GameOver(){
-
         //load Post Game Activity
-
     }
 
 }
