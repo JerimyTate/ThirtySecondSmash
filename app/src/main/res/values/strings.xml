@@ -3,6 +3,9 @@
     <string name="title">30 Second Smash</string>
     <string name="action_settings">Settings</string>
 
+    <string name="name_change_dialog_okay">Change Name</string>
+    <string name="dialog_cancel">Cancel</string>
+
     <!-- Login Screen Text? -->
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_game">GameActivity</string>

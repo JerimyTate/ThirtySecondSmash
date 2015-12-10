@@ -29,8 +29,8 @@ public class GameActivity extends AppCompatActivity{
     private TextView _value;
 
     //variables to load game length
-    public int GameTime=5000;
-    public int DecrementRate=1000;
+    public int GameTime=5000; //milliseconds
+    public int DecrementRate=1000; //milliseconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
