@@ -17,6 +17,7 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView _value;
 
+    //variables to load game length
     public int GameTime=5000;
     public int DecrementRate=1000;
 
