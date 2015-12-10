@@ -1,5 +1,6 @@
 package com.pressthatbutton.thirtysecondsmash;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,12 +20,20 @@ public class PlayerInstructions extends AppCompatActivity {
 
         txtInstruction1 = (TextView)findViewById(R.id.txt_instructions_1);
         txtInstruction2 = (TextView)findViewById(R.id.txt_instructions_2);
+
         btnHelpToMain = (Button)findViewById(R.id.btnHelpToMain);
         btnHelpToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
+                BackToMain(v);
             }
         });
+    }
+
+    //Return to Main Activity when clicked
+    private void BackToMain(View view)
+    {
+        Intent intent = new Intent(PlayerInstructions.this, MainActivity.class);
+        startActivity(intent);
     }
 }

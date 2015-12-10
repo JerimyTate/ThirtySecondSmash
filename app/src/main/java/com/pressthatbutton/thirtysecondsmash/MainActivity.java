@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startGame(v);
+                StartGame(v);
             }
         });
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btnMainToOwn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showMyHighScores(v);
+                ShowMyHighScores(v);
             }
         });
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         btnMainToAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAllHighScores(v);
+                ShowAllHighScores(v);
             }
         });
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnMainToHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playerInstructions(v);
+                PlayerInstructions(v);
             }
         });
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         btnChangeName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showChangeNameDialog();
+                ShowChangeNameDialog();
             }
         });
     }
@@ -71,34 +71,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Launch Game when clicked
-    public void startGame(View view)
+    public void StartGame(View view)
     {
         Intent intent = new Intent(MainActivity.this, GameActivity.class);
         startActivity(intent);
     }
 
     //Launch High All High Scores when clicked
-    public void showAllHighScores(View view)
+    public void ShowAllHighScores(View view)
     {
         Intent intent = new Intent(MainActivity.this, ShowAllHighScores.class);
         startActivity(intent);
     }
     //Launch High All High Scores when clicked
-    public void showMyHighScores(View view)
+    public void ShowMyHighScores(View view)
     {
         Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
         startActivity(intent);
     }
 
     //Launch Instructions when pressed
-    public void playerInstructions(View view)
+    public void PlayerInstructions(View view)
     {
         Intent intent = new Intent(MainActivity.this, PlayerInstructions.class);
         startActivity(intent);
     }
 
     //Launch Change Name Dialog
-    public void showChangeNameDialog() {
+    public void ShowChangeNameDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         ChangeNameDialogFragment newFragment = new ChangeNameDialogFragment();
 
