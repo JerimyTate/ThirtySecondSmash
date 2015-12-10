@@ -1,5 +1,10 @@
 package com.pressthatbutton.thirtysecondsmash;
 
+import android.content.DialogInterface;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity{
+
+    SoundPool plusOneSound;
+    int plusOneID;
+
     private TextView countdown_number;
     public int _counter=0;
     private String _stringVal;
@@ -29,6 +38,8 @@ public class GameActivity extends AppCompatActivity {
 
         increaseCount = (Button)findViewById(R.id.btnPlusOne);
         decreaseCount = (Button)findViewById(R.id.btnMinusOne);
+        plusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
+        plusOneID=plusOneSound.load(this, R.raw.plusone,1);
 
         _value = (TextView) findViewById(R.id.txt_game_score);
         countdown_number = (TextView)findViewById(R.id.txt_countdown_number);
@@ -73,6 +84,7 @@ public class GameActivity extends AppCompatActivity {
         _counter++;
         _stringVal = Integer.toString(_counter);
         _value.setText(_stringVal);
+        plusOneSound.load(this, R.raw.plusone, 1);
     }
     public void decrementScore(){
 
@@ -82,18 +94,23 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    //sets decrease button to visible and increase button to visible
     public void switchModes(){
 
         increaseCount.setVisibility(View.GONE);
         decreaseCount.setVisibility(View.VISIBLE);
 
     }
-
+    //sets increase button visible and decrease invisible
     public void switchBack(){
 
         increaseCount.setVisibility(View.VISIBLE);
         decreaseCount.setVisibility(View.GONE);
 
+    }
+
+
+    public void playPlusOne(View view){plusOneSound.play(plusOneID,1,1,1,0,1);
     }
 
     public void GameOver(){
