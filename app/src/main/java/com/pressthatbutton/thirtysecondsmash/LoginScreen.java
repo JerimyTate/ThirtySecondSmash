@@ -4,10 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -30,13 +33,13 @@ public class LoginScreen extends AppCompatActivity {
     private Button btnFacebook;
     private Button btnSignUp;
 
-    protected String name = null;
-    protected String email = null;
+    protected String email;
 
     public ParseUser parseUser;
 
     private EditText userName;
     private EditText password;
+    private TextView logInStatus;
 
     public static final List<String> mPermissions = new ArrayList<String>() {{
         add("public_profile");
@@ -48,8 +51,43 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        parseUser = ParseUser.getCurrentUser();
+
         userName = (EditText) findViewById(R.id.edit_txt_user_name);
         password = (EditText) findViewById(R.id.edit_txt_password);
+
+        logInStatus = (TextView) findViewById(R.id.txt_login_status);
+        if(!parseUser.getSessionToken().isEmpty()){
+            logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
+        }
+
+        //Filters out characters that are not letters or digits
+        InputFilter filter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                boolean keepOriginal = true;
+                StringBuilder stringBuilder = new StringBuilder(end - start);
+                for (int i = start; i<end;++i){
+                    char c = source.charAt(i);
+                    if(isCharAllowed(c)){
+                        stringBuilder.append(c);
+                    }else{
+                        keepOriginal = false;
+                    }
+                }
+                if(keepOriginal){
+                    return null;
+                }else {
+                    return stringBuilder;
+                }
+            }
+
+            private boolean isCharAllowed(char c){
+                return Character.isLetterOrDigit(c) || Character.isSpaceChar(c)
+                        || Character.valueOf(c).compareTo('@')==0 || Character.valueOf(c).compareTo('.')==0;
+            }
+        };
+        userName.setFilters(new InputFilter[]{filter});
 
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +107,9 @@ public class LoginScreen extends AppCompatActivity {
                 ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginScreen.this, mPermissions, new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException err) {
+                        if(err != null){
+                            Log.d("MyApp", "Error! Parse Exception Code: " + err.getCode());
+                        }
                         if (user == null) {
                             Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                         } else if (user.isNew()) {
@@ -77,11 +118,15 @@ public class LoginScreen extends AppCompatActivity {
                             saveNewUser();
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
-                        } else {
+                        } else if(!user.isNew()){
+                            Log.d("MyApp", "User logged in through Facebook!");
                             getUserDetailsFromFB();
+                            parseUser.setUsername(email);
+                            parseUser.setEmail(email);
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
-                            Log.d("MyApp", "User logged in through Facebook!");
+                        }else{
+                            Log.d("MyApp","User did not log on to Facebook.");
                         }
                     }
                 });
@@ -127,19 +172,18 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void saveNewUser() {
-        parseUser = ParseUser.getCurrentUser();
         parseUser.setUsername(email);
         parseUser.setEmail(email);
 
         parseUser.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if(e!=null){
+                if (e != null) {
                     //Save did not succeed.
-                    Toast.makeText(LoginScreen.this,"Error! Parse Exception Code: "+e.getCode(),Toast.LENGTH_LONG).show();
-                }else{
+                    Toast.makeText(LoginScreen.this, "Error! Parse Exception Code: " + e.getCode(), Toast.LENGTH_LONG).show();
+                } else {
                     //Object saved successfully.
-                    Toast.makeText(LoginScreen.this, "New user:" + name + " Signed up", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, "New user, " + email + ", signed up.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -151,8 +195,8 @@ public class LoginScreen extends AppCompatActivity {
             public void onCompleted(GraphResponse response) {
                 try{
                     email = response.getJSONObject().getString("email");
-                    userName.setText(email);
-                    saveNewUser();
+                    //Print everything in Log debug
+                    Log.d("MyApp",response.getRawResponse());
                 }
                 catch (JSONException e){
                     e.printStackTrace();

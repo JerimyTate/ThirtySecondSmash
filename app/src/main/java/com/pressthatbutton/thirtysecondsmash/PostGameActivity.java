@@ -10,8 +10,6 @@ public class PostGameActivity extends AppCompatActivity {
 
     public Button btnPlayAgain;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +23,10 @@ public class PostGameActivity extends AppCompatActivity {
 
     }
 
-        protected void StartGame(View view)
-        {
-            Intent intent = new Intent(PostGameActivity.this, GameActivity.class);
-            startActivity(intent);
-        }
+    protected void StartGame(View view)
+    {
+        Intent intent = new Intent(PostGameActivity.this, GameActivity.class);
+        startActivity(intent);
+    }
 
 }
