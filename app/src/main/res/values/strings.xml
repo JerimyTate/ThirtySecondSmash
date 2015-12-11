@@ -8,5 +8,6 @@
     <!-- Login Screen Text? -->
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="facebook_app_id">516678788499623</string>
 
 </resources>
