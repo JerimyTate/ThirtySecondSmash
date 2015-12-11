@@ -3,6 +3,7 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 
 /**
@@ -18,6 +19,8 @@ public class AppParse extends Application {
         super.onCreate();
 
         Parse.initialize(this, ApplicationID, ClientKey);
+        ParseFacebookUtils.initialize(this);
+
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
     }

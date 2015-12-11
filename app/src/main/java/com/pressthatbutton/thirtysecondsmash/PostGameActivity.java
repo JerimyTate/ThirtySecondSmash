@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.parse.ParseObject;
 
+import org.w3c.dom.Text;
+
 public class PostGameActivity extends AppCompatActivity {
 
     public Button btnPlayAgain;
