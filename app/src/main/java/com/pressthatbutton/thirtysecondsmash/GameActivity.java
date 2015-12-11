@@ -1,26 +1,39 @@
 package com.pressthatbutton.thirtysecondsmash;
 
-import android.content.DialogInterface;
-import android.media.AudioAttributes;
+import android.content.Intent;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
-public class GameActivity extends AppCompatActivity{
+public class GameActivity extends AppCompatActivity {
+
+
     SoundPool plusOneSound;
     SoundPool minusOneSound;
-
     int plusOneID;
     int minusOneID;
+
+
+    ///////////////SETTINGS///////////////////
+    //settings for determining how often button will switch
+    public int minPercent = 0;
+    public int maxPercent = 100;
+    public int percentSwitch = 15;
+
+    //variables to load game length
+    public int GameTime=5000; //milliseconds
+    public int DecrementRate=1000; //milliseconds
+    ///////////////SETTINGS///////////////////
+
+
+
 
     private TextView countdown_number;
     public int _counter=0;
@@ -30,9 +43,7 @@ public class GameActivity extends AppCompatActivity{
 
     private TextView _value;
 
-    //variables to load game length
-    public int GameTime=5000; //milliseconds
-    public int DecrementRate=1000; //milliseconds
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +52,15 @@ public class GameActivity extends AppCompatActivity{
 
         increaseCount = (Button)findViewById(R.id.btnPlusOne);
         decreaseCount = (Button)findViewById(R.id.btnMinusOne);
+
+        ///////////////////SOUNDS/////////////////////////////////
         plusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
+        plusOneID=plusOneSound.load(this, R.raw.plusone,1);
+
+        minusOneID=minusOneSound.load(this, R.raw.minusone,1);
         minusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
 
-        plusOneID=plusOneSound.load(this, R.raw.plusone,1);
-        minusOneID=minusOneSound.load(this, R.raw.minusone,1);
+        ///////////////////SOUNDS/////////////////////////////////
 
 
         _value = (TextView) findViewById(R.id.txt_game_score);
@@ -57,6 +72,7 @@ public class GameActivity extends AppCompatActivity{
             }
             public void onFinish() {
                 countdown_number.setText("End");
+                GameOver();
             }
         }.start();
 
@@ -68,15 +84,21 @@ public class GameActivity extends AppCompatActivity{
                 _value = (TextView) findViewById(R.id.txt_game_score);
                 if(countdown_number.getText()!="End") {
                     incrementScore();
-                    if(ThreadLocalRandom.current().nextInt(0, 9 + 1)==0)
+
+                    if(randInt(minPercent, maxPercent)< percentSwitch)
                     {
                         switchModes();
-                        try {
-                            Thread.sleep(1000);                 //1000 milliseconds is one second.
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                        }
-                        switchBack();
+                        new CountDownTimer(1000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+
+                            }
+
+                            public void onFinish() {
+                                switchBack();
+                            }
+                        }.start();
+
 
                     }
 
@@ -100,7 +122,7 @@ public class GameActivity extends AppCompatActivity{
         _counter++;
         _stringVal = Integer.toString(_counter);
         _value.setText(_stringVal);
-        plusOneSound.play(plusOneID,1,1,1,0,1);
+        plusOneSound.play(plusOneID, 1, 1, 1, 0, 1);
     }
 
     public void decrementScore(){
@@ -122,7 +144,30 @@ public class GameActivity extends AppCompatActivity{
     }
 
     public void GameOver(){
-        //load Post Game Activity
+        Intent intent = new Intent(GameActivity.this, PostGameActivity.class);
+        startActivity(intent);    }
+
+
+    /**
+     * Returns a psuedo-random number between minPercent and maxPercent, inclusive.
+     * The difference between minPercent and maxPercent can be at most
+     * <code>Integer.MAX_VALUE - 1</code>.
+     *
+     * @param min Minimim value
+     * @param max Maximim value.  Must be greater than minPercent.
+     * @return Integer between minPercent and maxPercent, inclusive.
+     * @see java.util.Random#nextInt(int)
+     */
+    public static int randInt(int min, int max) {
+
+        // Usually this can be a field rather than a method variable
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
     }
 
 }
