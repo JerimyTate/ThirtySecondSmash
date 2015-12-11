@@ -13,10 +13,9 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
-
-
     SoundPool plusOneSound;
     SoundPool minusOneSound;
+
     int plusOneID;
     int minusOneID;
 
@@ -52,15 +51,11 @@ public class GameActivity extends AppCompatActivity {
 
         increaseCount = (Button)findViewById(R.id.btnPlusOne);
         decreaseCount = (Button)findViewById(R.id.btnMinusOne);
-
-        ///////////////////SOUNDS/////////////////////////////////
         plusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
-        plusOneID=plusOneSound.load(this, R.raw.plusone,1);
-
-        minusOneID=minusOneSound.load(this, R.raw.minusone,1);
         minusOneSound= new SoundPool(10, AudioManager.STREAM_MUSIC,1);
 
-        ///////////////////SOUNDS/////////////////////////////////
+        plusOneID=plusOneSound.load(this, R.raw.plusone,1);
+        minusOneID=minusOneSound.load(this, R.raw.minusone,1);
 
 
         _value = (TextView) findViewById(R.id.txt_game_score);
@@ -145,7 +140,8 @@ public class GameActivity extends AppCompatActivity {
 
     public void GameOver(){
         Intent intent = new Intent(GameActivity.this, PostGameActivity.class);
-        startActivity(intent);    }
+        startActivity(intent);
+    }
 
 
     /**
