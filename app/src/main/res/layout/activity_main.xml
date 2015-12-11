@@ -12,26 +12,27 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/thirtysecsmashlogo_360"
-        android:layout_margin="10dp"/>
     <TextView
         android:id="@+id/txtHomeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/title"
         android:textSize="30dp"
         android:textAlignment="center"
         android:paddingBottom="10dp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/thirtysecsmashlogo_360"
+        android:layout_margin="10dp"/>
     <Button
         android:id="@+id/btnStartGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="20sp"
@@ -78,7 +79,7 @@
             android:onClick="playerInstructions"
             android:layout_margin="3dp"
             android:textColor="#fff"
-            android:background="@color/colorLightBlue"/>
+            android:background="@color/colorDarkBlue"/>
         <Button
             android:id="@+id/btnChangeName"
             android:layout_width="match_parent"
@@ -87,6 +88,15 @@
             android:text="Change Name"
             android:layout_margin="3dp"
             android:textColor="#fff"
-            android:background="@color/colorLightBlue"/>
+            android:background="@color/colorDarkBlue"/>
+        <Button
+            android:id="@+id/btnMainToLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SignUp/Login"
+            android:layout_margin="3dp"
+            android:textColor="#fff"
+            android:background="@color/colorDarkBlue"/>
     </LinearLayout>
 </LinearLayout>

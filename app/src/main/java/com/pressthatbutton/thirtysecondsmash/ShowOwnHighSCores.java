@@ -35,14 +35,14 @@ public class ShowOwnHighScores extends AppCompatActivity {
     //Launch All High Scores when clicked
     private void ShowAllHighScores(View view)
     {
-        Intent intent = new Intent(ShowOwnHighScores.this, ShowAllHighScores.class);
+        Intent intent = new Intent(view.getContext(), ShowAllHighScores.class);
         startActivity(intent);
     }
 
     //Return to Main Activity when clicked
     private void BackToMain(View view)
     {
-        Intent intent = new Intent(ShowOwnHighScores.this, MainActivity.class);
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
     }
 }

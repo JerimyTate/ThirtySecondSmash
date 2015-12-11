@@ -39,7 +39,7 @@ public class PlayerInstructions extends AppCompatActivity {
     //Return to Main Activity when clicked
     private void BackToMain(View view)
     {
-        Intent intent = new Intent(PlayerInstructions.this, MainActivity.class);
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
     }
 }
