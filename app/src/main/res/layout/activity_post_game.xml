@@ -15,7 +15,28 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Game Over"
         android:id="@+id/textView4"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="177dp" />
+        android:layout_alignParentTop="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="136dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:textSize="45dp"
+        android:layout_alignParentBottom="false"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btnplayAgain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightBlue"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:text="Play Again?"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="93dp" />
+
+
 </RelativeLayout>
