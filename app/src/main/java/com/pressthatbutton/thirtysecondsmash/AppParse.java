@@ -3,6 +3,7 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 /**
  * Created by JFaucette on 11/23/15.
@@ -17,6 +18,8 @@ public class AppParse extends Application {
         super.onCreate();
 
         Parse.initialize(this, ApplicationID, ClientKey);
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
     }
 }
 

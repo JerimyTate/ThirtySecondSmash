@@ -33,7 +33,7 @@
         <activity android:name=".ShowAllHighScores" />
         <activity android:name=".ShowOwnHighScores" />
         <activity android:name=".PlayerInstructions" />
-        <activity android:name=".PostGameActivity"></activity>
+        <activity android:name=".PostGameActivity"/>
     </application>
 
 </manifest>
