@@ -19,6 +19,9 @@ public class GameActivity extends AppCompatActivity {
     int plusOneID;
     int minusOneID;
 
+   public static int GameScore;
+
+
     ///////////////SETTINGS///////////////////
     //settings for determining how often button will switch
     public int minPercent = 0;
@@ -128,7 +131,8 @@ public class GameActivity extends AppCompatActivity {
         decreaseCount.setVisibility(View.GONE);
     }
 
-    public void GameOver() {
+    public void GameOver(){
+        GameScore = _counter;
         Intent intent = new Intent(GameActivity.this, PostGameActivity.class);
         startActivity(intent);
     }
