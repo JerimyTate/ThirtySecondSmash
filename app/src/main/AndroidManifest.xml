@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".GameActivity"
             android:label="@string/title_activity_game"
@@ -30,10 +31,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
         </activity>
+
         <activity android:name=".ShowAllHighScores" />
         <activity android:name=".ShowOwnHighScores" />
         <activity android:name=".PlayerInstructions" />
-        <activity android:name=".PostGameActivity"></activity>
-    </application>
+        <activity android:name=".PostGameActivity" />
 
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+        <meta-data
+            android:name="com.facebook.SDK.ApplicationID"
+            android:value="@string/facebook_app_id" />
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider516678788499623"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+    </application>
 </manifest>
