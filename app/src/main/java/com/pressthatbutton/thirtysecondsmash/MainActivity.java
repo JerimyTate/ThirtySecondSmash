@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public Button btnMainToAll;
     public Button btnMainToHelp;
     public Button btnChangeName;
+    public Button btnMainToLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,29 +86,37 @@ public class MainActivity extends AppCompatActivity {
                 ShowChangeNameDialog();
             }
         });
+
+        btnMainToLogin = (Button) findViewById(R.id.btnMainToLogin);
+        btnMainToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowLoginScreen(v);
+            }
+        });
     }
 
     //Launch Game when clicked
     protected void StartGame(View view) {
-        Intent intent = new Intent(MainActivity.this, GameActivity.class);
+        Intent intent = new Intent(view.getContext(), GameActivity.class);
         startActivity(intent);
     }
 
     //Launch High All High Scores when clicked
     protected void ShowAllHighScores(View view) {
-        Intent intent = new Intent(MainActivity.this, ShowAllHighScores.class);
+        Intent intent = new Intent(view.getContext(), ShowAllHighScores.class);
         startActivity(intent);
     }
 
     //Launch High Own High Scores when clicked
     protected void ShowMyHighScores(View view) {
-        Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
+        Intent intent = new Intent(view.getContext(), ShowOwnHighScores.class);
         startActivity(intent);
     }
 
     //Launch Instructions when pressed
     protected void PlayerInstructions(View view) {
-        Intent intent = new Intent(MainActivity.this, PlayerInstructions.class);
+        Intent intent = new Intent(view.getContext(), PlayerInstructions.class);
         startActivity(intent);
     }
 
@@ -119,59 +128,9 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(fragmentManager, "ChangeNameDialog");
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-            Action.TYPE_VIEW, // TODO: choose an action type.
-            "Main Page", // TODO: Define a title for the content shown.
-            // TODO: If you have web page content that matches this app activity's content,
-            // make sure this auto-generated web page URL is correct.
-            // Otherwise, set the URL to null.
-            Uri.parse("http://host/path"),
-            // TODO: Make sure this auto-generated app deep link URI is correct.
-            Uri.parse("android-app://com.pressthatbutton.thirtysecondsmash/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-            Action.TYPE_VIEW, // TODO: choose an action type.
-            "Main Page", // TODO: Define a title for the content shown.
-            // TODO: If you have web page content that matches this app activity's content,
-            // make sure this auto-generated web page URL is correct.
-            // Otherwise, set the URL to null.
-            Uri.parse("http://host/path"),
-            // TODO: Make sure this auto-generated app deep link URI is correct.
-            Uri.parse("android-app://com.pressthatbutton.thirtysecondsmash/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+    //Launch Log In Screen when clicked
+    protected void ShowLoginScreen(View view){
+        Intent intent = new Intent(view.getContext(), LoginScreen.class);
+        startActivity(intent);
     }
 }

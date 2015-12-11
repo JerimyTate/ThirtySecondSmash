@@ -26,14 +26,14 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
+    // Android SDK
+    // Audience Network SDK. Only versions 4.6.0 and above are available
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.parse:parsefacebookutils-v4-android:1.10.3@aar'
-    // Android SDK
     compile 'com.facebook.android:facebook-android-sdk:4.+'
-    // Audience Network SDK. Only versions 4.6.0 and above are available
     compile 'com.facebook.android:audience-network-sdk:4.+'
 }

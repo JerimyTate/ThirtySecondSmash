@@ -32,6 +32,15 @@
         android:layout_gravity="center"
         android:src="@drawable/bluebutton"/>
 
+    <TextView
+        android:id="@+id/txt_login_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:text="You are currently Logged Out."/>
+
     <EditText
         android:id="@+id/edit_txt_user_name"
         android:layout_width="match_parent"
@@ -39,8 +48,7 @@
         android:focusable="true"
         android:textColorHighlight="#ff7eff15"
         android:textColorHint="#0b05ff"
-        android:layout_marginTop="46dp"
-        android:hint="Enter Name"/>
+        android:hint="Enter User Name or Email"/>
 
     <EditText
         android:id="@+id/edit_txt_password"
@@ -50,25 +58,6 @@
         android:ems="10"
         android:textColorHint="#FF0B05FF"
         android:hint="Password" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="25dp"
-            android:text="Attempts Left:"/>
-        <TextView
-            android:id="@+id/txt_num_attempts_left"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="25dp"
-            android:text="10"/>
-    </LinearLayout>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btnFacebook"
