@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseInstallation;
 
 /**
  * Created by JFaucette on 11/23/15.
@@ -19,6 +20,8 @@ public class AppParse extends Application {
 
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);
+
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
     }
 }

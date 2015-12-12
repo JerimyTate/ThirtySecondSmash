@@ -35,7 +35,9 @@
         <activity android:name=".ShowAllHighScores" />
         <activity android:name=".ShowOwnHighScores" />
         <activity android:name=".PlayerInstructions" />
-        <activity android:name=".PostGameActivity" />
+        <activity android:name=".PostGameActivity"/>
+    </application>
+    
 
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -49,5 +51,5 @@
         <provider android:authorities="com.facebook.app.FacebookContentProvider516678788499623"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
-    </application>
+
 </manifest>
