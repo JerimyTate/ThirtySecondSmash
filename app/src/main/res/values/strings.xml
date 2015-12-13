@@ -8,13 +8,17 @@
 
     <!-- Login Screen Text? -->
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_game">GameActivity</string>
-    <string name="facebook_app_id">516678788499623</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_game">Game Activity</string>
+    <string name="title_activity_show_all_high_scores">All High Scores</string>
+    <string name="title_activity_show_own_high_scores">Own High Scores</string>
+    <string name="title_activity_login">Log In / Sign Up</string>
+    <string name="title_activity_player_instructions">Instructions / Help</string>
+    <string name="title_activity_post_game">Post Game</string>
+
+    <string name="facebook_app_id">516678788499623</string>
 
     <string name="parse_app_id">E7XJt4pIywhKbpZ0tJKIpqwtHKmqasv1ZmfIk5vo</string>
     <string name="parse_client_key">eEg41XmXSQxHKxqZB9nGdB1c2iKYti1GF8C9SHFi</string>
 
-    </resources>
+</resources>
