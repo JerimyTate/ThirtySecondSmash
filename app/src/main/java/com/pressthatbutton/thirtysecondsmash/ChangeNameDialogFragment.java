@@ -51,6 +51,7 @@ public class ChangeNameDialogFragment extends DialogFragment {
 
         //null parent because it is a dialog
         builder.setView(inflater.inflate(R.layout.fragment_change_name_dialog,null))
+                .setTitle(R.string.name_change_dialog_title)
                 .setPositiveButton(R.string.name_change_dialog_okay, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -64,7 +65,7 @@ public class ChangeNameDialogFragment extends DialogFragment {
                         dismiss();
                     }
                 })
-                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.name_change_dialog_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dismiss();
