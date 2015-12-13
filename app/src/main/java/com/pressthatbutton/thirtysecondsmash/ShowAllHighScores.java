@@ -49,6 +49,7 @@ public class ShowAllHighScores extends AppCompatActivity {
         Toast.makeText(getBaseContext(), "Loading All Scores...", Toast.LENGTH_LONG);
         try {
             ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
+            query.addDescendingOrder("score");
             query.findInBackground(new FindCallback<Score>() {
                 @Override
                 public void done(List<Score> list, ParseException e) {

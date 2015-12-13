@@ -80,6 +80,8 @@ public class SignUpFragment extends Fragment{
                     //Not empty field
                     parseUser.setUsername(edit_txt_username.getText().toString());
                     parseUser.setPassword(edit_txt_password.getText().toString());
+                    Log.d("MyApp","Session token: "+AppParse._parseSession.getSessionToken()+". ParseUser SessionToken: "
+                            +parseUser.getSessionToken()+". ParseUser isAuthenticated: "+parseUser.isAuthenticated());
                     parseUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
@@ -88,10 +90,11 @@ public class SignUpFragment extends Fragment{
                                 Intent intent = new Intent(getContext(),MainActivity.class);
                                 startActivity(intent);
                                 getActivity().finish();
-                            } else {
-                                Toast.makeText(getContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG).show();
+                            } else if (e!=null){
                                 Log.d("MyApp", "Error! ParseException code: " + e.getCode());
                                 e.printStackTrace();
+                            }else{
+                                Log.d("MyApp","SignUpFragment signUpInBackground. ParseUser name: "+parseUser.getUsername()+". Session token: "+parseUser.getSessionToken());
                             }
                         }
                     });

@@ -8,6 +8,7 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParseSession;
 import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
@@ -19,6 +20,7 @@ public class AppParse extends Application {
     private String ApplicationID = "E7XJt4pIywhKbpZ0tJKIpqwtHKmqasv1ZmfIk5vo";
     private String ClientKey = "eEg41XmXSQxHKxqZB9nGdB1c2iKYti1GF8C9SHFi";
     public static ParseUser _parseUser;
+    public static ParseSession _parseSession;
 
     @Override
     public void onCreate() {
@@ -27,9 +29,11 @@ public class AppParse extends Application {
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Score.class);
         ParseObject.registerSubclass(ParseUser.class);
+        ParseObject.registerSubclass(ParseSession.class);
+
         _parseUser = new ParseUser();
         _parseUser.setUsername("Unknown User");
-        _parseUser.getSessionToken();
+        _parseSession = new ParseSession();
 
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);
