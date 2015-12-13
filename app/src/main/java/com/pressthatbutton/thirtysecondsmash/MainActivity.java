@@ -4,24 +4,19 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 
-import com.parse.Parse;
-import com.parse.ParseUser;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String PACKAGE_NAME = "com.pressthatbutton.thirtysecondsmash";
     public Button btnStartGame;
     public Button btnMainToOwn;
     public Button btnMainToAll;
@@ -35,20 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //I have no clue what this does.
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(PACKAGE_NAME, PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            //
-        } catch (NoSuchAlgorithmException e) {
-            //
-        }
 
         btnStartGame = (Button) findViewById(R.id.btnStartGame);
         btnStartGame.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         btnChangeName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowChangeNameDialog();
+                ShowChangeNameDialog(v);
             }
         });
 
@@ -124,10 +105,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Launch Change Name Dialog
-    protected void ShowChangeNameDialog() {
-        Bundle bundle = new Bundle();
+    protected void ShowChangeNameDialog(View view) {
         ChangeNameDialogFragment changeNameDialogFragment = new ChangeNameDialogFragment();
-        changeNameDialogFragment.onCreateDialog(bundle);
+        changeNameDialogFragment.show(getSupportFragmentManager(),"ChangeNameDialogCall");
     }
 
     //Launch Log In Screen when clicked

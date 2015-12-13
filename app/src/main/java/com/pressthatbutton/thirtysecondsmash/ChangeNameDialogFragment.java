@@ -3,6 +3,7 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -35,10 +36,9 @@ public class ChangeNameDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_change_name_dialog, container, false);
-        SetUpFragmentXML();
-
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_change_name_dialog, container, false);
+
         return view;
     }
 
@@ -50,7 +50,7 @@ public class ChangeNameDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //null parent because it is a dialog
-        builder.setView(inflater.inflate(R.layout.fragment_change_name_dialog,null))
+        builder.setView(inflater.inflate(R.layout.fragment_change_name_dialog, null))
                 .setTitle(R.string.name_change_dialog_title)
                 .setPositiveButton(R.string.name_change_dialog_okay, new DialogInterface.OnClickListener() {
                     @Override
@@ -72,11 +72,10 @@ public class ChangeNameDialogFragment extends DialogFragment {
                         failedNameChange();
                     }
                 });
-        SetUpFragmentXML();
         return builder.create();
     }
 
-    private void SetUpFragmentXML(){
+/*    private void SetUpFragmentXML(){
         parseUser = ParseUser.getCurrentUser();
 
         currentName = (TextView)getView().findViewById(R.id.txt_display_current_name);
@@ -115,7 +114,7 @@ public class ChangeNameDialogFragment extends DialogFragment {
         }else {
             _currentNameOfUser = parseUser.getUsername();
         }
-    }
+    }*/
 
     //Displays toast
     private void failedNameChange(){

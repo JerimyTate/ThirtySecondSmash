@@ -3,10 +3,10 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.app.Application;
 
 import com.parse.Parse;
-import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
-import com.parse.ParseUser;
+import com.parse.ParseObject;
+import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
 /**
  * Created by JFaucette on 11/23/15.
@@ -21,6 +21,7 @@ public class AppParse extends Application {
         super.onCreate();
 
         Parse.enableLocalDatastore(this);
+        ParseObject.registerSubclass(Score.class);
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);
 
