@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -78,10 +79,18 @@ public class SignUpFragment extends Fragment{
                     Log.d("MyApp","SignUpFragment Empty Field Error.");
                 } else {
                     //Not empty field
+                    parseUser.logOutInBackground(new LogOutCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e!=null){
+                                Log.d("MyApp","SignUpFragment parseUser.logOutInBackground. ParseException code: "+e.getCode());
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                     parseUser.setUsername(edit_txt_username.getText().toString());
                     parseUser.setPassword(edit_txt_password.getText().toString());
-                    Log.d("MyApp","Session token: "+AppParse._parseSession.getSessionToken()+". ParseUser SessionToken: "
-                            +parseUser.getSessionToken()+". ParseUser isAuthenticated: "+parseUser.isAuthenticated());
+                    Log.d("MyApp","ParseUser SessionToken: " +parseUser.getSessionToken()+". ParseUser isAuthenticated: "+parseUser.isAuthenticated());
                     parseUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
