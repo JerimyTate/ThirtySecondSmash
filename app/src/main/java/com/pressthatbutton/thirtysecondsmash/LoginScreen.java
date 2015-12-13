@@ -61,7 +61,7 @@ public class LoginScreen extends AppCompatActivity {
         ll_log_in_components = (LinearLayout)findViewById(R.id.container_log_in_components);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
-        if(parseUser!= null){
+        if(parseUser!= null && parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
         }
 
@@ -189,13 +189,15 @@ public class LoginScreen extends AppCompatActivity {
                     //Save did not succeed.
                     Toast.makeText(LoginScreen.this, "Error! Parse Exception Code: " + e.getCode(), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
-                } else {
+                } else if (parseUser.isAuthenticated()) {
                     //Object saved successfully.
                     if (isNew) {
-                        Toast.makeText(LoginScreen.this, "New user, " + email + ", signed up.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginScreen.this, "New user, " + parseUser.getUsername() + ", signed up.", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(LoginScreen.this, "Returning user, " + email + ", successfully logged in.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginScreen.this, "Returning user, " + parseUser.getUsername() + ", successfully logged in.", Toast.LENGTH_LONG).show();
                     }
+                }else{
+                    Log.d("MyApp","LoginScreen saveNewUser(). ParseUser session token: "+parseUser.getSessionToken());
                 }
             }
         });

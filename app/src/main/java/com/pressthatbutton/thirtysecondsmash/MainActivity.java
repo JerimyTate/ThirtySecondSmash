@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*if(parseUser==null){
+        /*if(!parseUser.isAuthenticated()){
             btnMainToAll.setVisibility(View.GONE);
             btnMainToOwn.setVisibility(View.GONE);
             btnStartGame.setVisibility(View.GONE);
