@@ -18,7 +18,7 @@ public class AppParse extends Application {
 
     private String ApplicationID = "E7XJt4pIywhKbpZ0tJKIpqwtHKmqasv1ZmfIk5vo";
     private String ClientKey = "eEg41XmXSQxHKxqZB9nGdB1c2iKYti1GF8C9SHFi";
-    public static final ParseUser _parseUser = null;
+    public static ParseUser _parseUser;
 
     @Override
     public void onCreate() {
@@ -26,6 +26,9 @@ public class AppParse extends Application {
 
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Score.class);
+        ParseObject.registerSubclass(ParseUser.class);
+        _parseUser = new ParseUser();
+        _parseUser.setUsername("Unknown User");
 
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);

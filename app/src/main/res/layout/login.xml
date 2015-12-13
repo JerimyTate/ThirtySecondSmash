@@ -32,11 +32,6 @@
         android:layout_gravity="center"
         android:src="@drawable/bluebutton"/>
 
-    <LinearLayout
-        android:id="@+id/container_signup_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
     <TextView
         android:id="@+id/txt_login_status"
         android:layout_width="match_parent"
@@ -46,51 +41,65 @@
         android:gravity="center"
         android:text="You are currently Logged Out."/>
 
-    <EditText
-        android:id="@+id/edit_txt_user_name"
+    <LinearLayout
+        android:id="@+id/container_signup_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#0b05ff"
-        android:hint="Enter User Name"/>
-
-    <EditText
-        android:id="@+id/edit_txt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:textColorHint="#FF0B05FF"
-        android:hint="Password" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/btnFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
+        android:id="@+id/container_log_in_components"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp">
-        <Button
-            android:id="@+id/btnLogin"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_txt_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Log In"/>
-        <Button
-            android:id="@+id/btnSignUp"
+            android:focusable="true"
+            android:textColorHighlight="#ff7eff15"
+            android:textColorHint="#0b05ff"
+            android:hint="Enter User Name"/>
+
+        <EditText
+            android:id="@+id/edit_txt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Sign Up"/>
+            android:inputType="textPassword"
+            android:ems="10"
+            android:textColorHint="#FF0B05FF"
+            android:hint="Password" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btnFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp">
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Log In"/>
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Sign Up"/>
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
