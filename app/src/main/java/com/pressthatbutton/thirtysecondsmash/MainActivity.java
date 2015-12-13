@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,17 +11,13 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.view.View;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
+
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
-import com.parse.ParseObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     public static final String PACKAGE_NAME = "com.pressthatbutton.thirtysecondsmash";
     public Button btnStartGame;
@@ -32,7 +27,7 @@ public class MainActivity extends AppCompatActivity  {
     public Button btnChangeName;
     public Button btnMainToLogin;
 
-     public static String PlayerName="Pl";
+    public static String PlayerName = "Pl";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +35,11 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         Parse.enableLocalDatastore(this);
-
         Parse.initialize(this);
 
 
         try {
-            PackageInfo info = getPackageManager().getPackageInfo(PACKAGE_NAME,PackageManager.GET_SIGNATURES);
+            PackageInfo info = getPackageManager().getPackageInfo(PACKAGE_NAME, PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
@@ -56,7 +50,6 @@ public class MainActivity extends AppCompatActivity  {
         } catch (NoSuchAlgorithmException e) {
             //
         }
-
 
 
         btnStartGame = (Button) findViewById(R.id.btnStartGame);
@@ -141,7 +134,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     //Launch Log In Screen when clicked
-    protected void ShowLoginScreen(View view){
+    protected void ShowLoginScreen(View view) {
         Intent intent = new Intent(MainActivity.this, LoginScreen.class);
         startActivity(intent);
     }
