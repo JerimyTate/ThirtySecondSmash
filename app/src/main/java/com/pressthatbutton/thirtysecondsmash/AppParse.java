@@ -29,6 +29,7 @@ public class AppParse extends Application {
         ParseObject.registerSubclass(ParseUser.class);
         _parseUser = new ParseUser();
         _parseUser.setUsername("Unknown User");
+        _parseUser.getSessionToken();
 
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);

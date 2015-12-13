@@ -35,12 +35,12 @@ public class PostGameActivity extends AppCompatActivity {
             score = new Score();
             score.setOwner(parseUser);
             score.setScore(GameActivity.gameScore);
-            Log.d("MyApp","Before Save, Uuid: "+score.getUuidString()+"; Owner: "+score.getOwner().toString()+"; Score: "+score.getScore());
+            Log.d("MyApp","Before Save, Owner: "+score.getOwner().toString()+"; Score: "+score.getScore());
             score.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        Log.d("MyApp", "Score saved. User is " + score.getOwner() + ". Score Uuid is " + score.getUuidString());
+                        Log.d("MyApp", "Score saved. User is " + score.getOwner() + ". Score is: " + score.getScore());
                     } else {
                         Log.d("MyApp", "SaveCallBack Error! Score not saved. ParseException code: " + e.getCode());
                     }

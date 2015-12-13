@@ -83,7 +83,7 @@ public class SignUpFragment extends Fragment{
                     parseUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
-                            if (e == null) {
+                            if (e == null || parseUser.isAuthenticated()) {
                                 Toast.makeText(getContext(), "Signed up as " + parseUser.getUsername(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getContext(),MainActivity.class);
                                 startActivity(intent);

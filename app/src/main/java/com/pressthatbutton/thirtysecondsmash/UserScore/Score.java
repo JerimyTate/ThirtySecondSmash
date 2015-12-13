@@ -5,13 +5,10 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import java.util.UUID;
-
 @ParseClassName("Score")
 public class Score extends ParseObject {
 
     public Score() {
-        setUuidString();
         setScore(0);
     }
 
@@ -21,15 +18,6 @@ public class Score extends ParseObject {
 
     public ParseUser getOwner(){
         return getParseUser("owner");
-    }
-
-    public void setUuidString() {
-        UUID uuid = UUID.randomUUID();
-        put("uuid",uuid.toString());
-    }
-
-    public String getUuidString() {
-        return getString("uuid");
     }
 
     public void setScore(Integer score) {
