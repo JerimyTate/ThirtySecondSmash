@@ -33,7 +33,6 @@ public class PostGameActivity extends AppCompatActivity {
 
         try {
             score = new Score();
-            score.setUuidString();
             score.setOwner(parseUser);
             score.setScore(GameActivity.gameScore);
             Log.d("MyApp","Before Save, Uuid: "+score.getUuidString()+"; Owner: "+score.getOwner().toString()+"; Score: "+score.getScore());
