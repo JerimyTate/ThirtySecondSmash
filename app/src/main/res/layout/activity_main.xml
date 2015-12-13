@@ -50,21 +50,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Your High Scores"
             android:layout_margin="3dp"
-            android:onClick="showMyHighScores"
             android:textColor="#fff"
-            android:background="@color/colorLightBlue"/>
+            android:background="@color/colorLightBlue"
+            android:text="All High Scores"/>
         <Button
             android:id="@+id/btnMainToOwn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="All High Scores"
-            android:onClick="showAllHighScores"
             android:layout_margin="3dp"
             android:textColor="#fff"
-            android:background="@color/colorLightBlue"/>
+            android:background="@color/colorLightBlue"
+            android:text="Your High Scores"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,28 +73,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Instructions"
-            android:onClick="playerInstructions"
             android:layout_margin="3dp"
             android:textColor="#fff"
-            android:background="@color/colorDarkBlue"/>
+            android:background="@color/colorDarkBlue"
+            android:text="Instructions"/>
         <Button
             android:id="@+id/btnChangeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change Name"
             android:layout_margin="3dp"
             android:textColor="#fff"
-            android:background="@color/colorDarkBlue"/>
+            android:background="@color/colorDarkBlue"
+            android:text="Change Name"/>
         <Button
             android:id="@+id/btnMainToLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SignUp/Login"
             android:layout_margin="3dp"
             android:textColor="#fff"
-            android:background="@color/colorDarkBlue"/>
+            android:background="@color/colorDarkBlue"
+            android:text="SignUp/Login"/>
     </LinearLayout>
 </LinearLayout>
