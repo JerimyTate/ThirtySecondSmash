@@ -19,15 +19,14 @@ public class ShowAllHighScores extends AppCompatActivity {
         btnAllToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowMyHighScores(v);
-            }
+                BackToMain(v);            }
         });
 
         btnAllToOwn = (Button)findViewById(R.id.btnAllToOwn);
         btnAllToOwn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BackToMain(v);
+                ShowMyHighScores(v);
             }
         });
     }

@@ -15,11 +15,14 @@ import android.view.View;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     public static final String PACKAGE_NAME = "com.pressthatbutton.thirtysecondsmash";
     public Button btnStartGame;
@@ -36,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this);
+
+
         try {
             PackageInfo info = getPackageManager().getPackageInfo(PACKAGE_NAME,PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
@@ -48,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             //
         }
+
+
 
         btnStartGame = (Button) findViewById(R.id.btnStartGame);
         btnStartGame.setOnClickListener(new View.OnClickListener() {
