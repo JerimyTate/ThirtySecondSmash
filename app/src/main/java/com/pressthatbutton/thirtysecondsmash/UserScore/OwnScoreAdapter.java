@@ -1,6 +1,7 @@
 package com.pressthatbutton.thirtysecondsmash.UserScore;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,13 @@ public class OwnScoreAdapter extends ArrayAdapter<Score> {
         View scoreOwnItemView = inflater.inflate(LIST_MENU_ITEM_LAYOUT,parent,false);
 
         //For OwnHighScores
-        TextView txtOwnScoreItem = (TextView) scoreOwnItemView.findViewById(R.id.txt_own_score_item);
-        txtOwnScoreItem.setText(_scores.get(position).getScore());
+        try {
+            TextView txtOwnScoreItem = (TextView) scoreOwnItemView.findViewById(R.id.txt_own_score_item);
+            txtOwnScoreItem.setText(_scores.get(position).getScore());
+        }catch (Exception e){
+            Log.d("MyApp","OwnScoreAdapter Error: "+e.getMessage());
+            e.printStackTrace();
+        }
 
         return scoreOwnItemView;
     }

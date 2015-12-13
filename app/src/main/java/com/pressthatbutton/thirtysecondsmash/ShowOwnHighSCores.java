@@ -3,6 +3,7 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -51,23 +52,29 @@ public class ShowOwnHighScores extends AppCompatActivity {
         parseUser = ParseUser.getCurrentUser();
 
         Toast.makeText(getBaseContext(), "Loading Own Scores...", Toast.LENGTH_LONG);
-        ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
-        query.findInBackground(new FindCallback<Score>() {
-            @Override
-            public void done(List<Score> list, ParseException e) {
-                if (e == null) {
-                    for(Score s: list){
-                        if(s.getOwner().compareTo(parseUser.getUsername())==0){
-                            _scores.add(s);
+        try {
+            ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
+            query.findInBackground(new FindCallback<Score>() {
+                @Override
+                public void done(List<Score> list, ParseException e) {
+                    if (e == null) {
+                        for (Score s : list) {
+                            if (s.getOwner().compareTo(parseUser.getUsername()) == 0) {
+                                _scores.add(s);
+                            }
                         }
+                    } else {
+                        Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
+                        e.printStackTrace();
                     }
-                } else {
-                    Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
                 }
-            }
-        });
-        lvOwnScores = (ListView)findViewById(R.id.own_score_list_view);
-        lvOwnScores.setAdapter(new AllScoresAdapter(getBaseContext(), OwnScoreAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
+            });
+            lvOwnScores = (ListView)findViewById(R.id.own_score_list_view);
+            lvOwnScores.setAdapter(new AllScoresAdapter(getBaseContext(), OwnScoreAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
+        }catch (Exception e){
+            Log.d("MyApp", "ShowOwnHighScore ParseQuery Error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     //Launch All High Scores when clicked

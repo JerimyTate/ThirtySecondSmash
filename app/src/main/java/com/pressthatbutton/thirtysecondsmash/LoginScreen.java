@@ -3,6 +3,9 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -91,10 +94,11 @@ public class LoginScreen extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Bring up Dialog box to SAVE new Parse User.
-                //NEED TO WORK ON!
-                Intent intent = new Intent(LoginScreen.this, MainActivity.class);
-                startActivity(intent);
+                Fragment fragment = new SignUpFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_signup_fragment, fragment);
+                fragmentTransaction.commit();
             }
         });
 
@@ -107,6 +111,7 @@ public class LoginScreen extends AppCompatActivity {
                     public void done(ParseUser user, ParseException err) {
                         if(err != null){
                             Log.d("MyApp", "Error! Parse Exception Code: " + err.getCode());
+                            err.printStackTrace();
                         }
                         if (user == null) {
                             Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
@@ -156,7 +161,7 @@ public class LoginScreen extends AppCompatActivity {
                                 Toast.makeText(LoginScreen.this, "Username and/or Password does not match Parse's records.", Toast.LENGTH_LONG).show();
                             } else {
                                 //An error occurred.
-                                Toast.makeText(LoginScreen.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
                             }
                         }
                     });
@@ -179,11 +184,12 @@ public class LoginScreen extends AppCompatActivity {
                 if (e != null) {
                     //Save did not succeed.
                     Toast.makeText(LoginScreen.this, "Error! Parse Exception Code: " + e.getCode(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 } else {
                     //Object saved successfully.
-                    if(isNew){
+                    if (isNew) {
                         Toast.makeText(LoginScreen.this, "New user, " + email + ", signed up.", Toast.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         Toast.makeText(LoginScreen.this, "Returning user, " + email + ", successfully logged in.", Toast.LENGTH_LONG).show();
                     }
                 }

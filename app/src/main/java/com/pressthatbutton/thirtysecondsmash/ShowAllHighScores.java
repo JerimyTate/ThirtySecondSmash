@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -45,20 +46,26 @@ public class ShowAllHighScores extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(getBaseContext(),"Loading All Scores...",Toast.LENGTH_LONG);
-        ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
-        query.findInBackground(new FindCallback<Score>() {
-            @Override
-            public void done(List<Score> list, ParseException e) {
-                if(e==null){
-                    _scores = list;
-                }else{
-                    Toast.makeText(getBaseContext(),"Error! ParseException code: "+e.getCode(),Toast.LENGTH_LONG);
+        Toast.makeText(getBaseContext(), "Loading All Scores...", Toast.LENGTH_LONG);
+        try {
+            ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
+            query.findInBackground(new FindCallback<Score>() {
+                @Override
+                public void done(List<Score> list, ParseException e) {
+                    if (e == null) {
+                        _scores = list;
+                    } else {
+                        Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
-        lvAllScores = (ListView)findViewById(R.id.all_score_list_view);
-        lvAllScores.setAdapter(new AllScoresAdapter(getBaseContext(), AllScoresAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
+            });
+            lvAllScores = (ListView)findViewById(R.id.all_score_list_view);
+            lvAllScores.setAdapter(new AllScoresAdapter(getBaseContext(), AllScoresAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
+        }catch (Exception e){
+            Log.d("MyApp","ShowAllHighScore ParseQuery Error: "+e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     //Launch Own High Scores when clicked

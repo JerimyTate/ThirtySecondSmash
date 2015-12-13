@@ -1,6 +1,7 @@
 package com.pressthatbutton.thirtysecondsmash.UserScore;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,15 @@ public class AllScoresAdapter extends ArrayAdapter<Score> {
         View scoreAllItemView = inflater.inflate(LIST_MENU_ITEM_LAYOUT,parent,false);
 
         //For AllHighScores
-        TextView txtAllScoresItem = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item);
-        txtAllScoresItem.setText(_scores.get(position).getScore());
-        TextView txtAllScoresItemOwner = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item_user_name);
-        txtAllScoresItemOwner.setText(_scores.get(position).getOwner());
+        try {
+            TextView txtAllScoresItem = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item);
+            txtAllScoresItem.setText(_scores.get(position).getScore());
+            TextView txtAllScoresItemOwner = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item_user_name);
+            txtAllScoresItemOwner.setText(_scores.get(position).getOwner());
+        }catch (Exception e){
+            Log.d("MyApp", "AllScoresAdapter Error: "+e.getMessage());
+            e.printStackTrace();
+        }
 
         return scoreAllItemView;
     }

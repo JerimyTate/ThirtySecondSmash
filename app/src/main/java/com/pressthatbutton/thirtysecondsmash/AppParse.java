@@ -26,11 +26,6 @@ public class AppParse extends Application {
 
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Score.class);
-        try{
-            _parseUser.fetchIfNeeded();
-        }catch (ParseException e){
-            Log.d("MyApp","Error with parseUser.fetchIfNeeded()! parseException code: "+e.getCode());
-        }
 
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);

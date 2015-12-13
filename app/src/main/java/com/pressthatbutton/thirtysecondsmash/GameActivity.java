@@ -6,15 +6,9 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
 import java.util.Random;
 
@@ -46,15 +40,10 @@ public class GameActivity extends AppCompatActivity {
     private Button increaseCount;
     private Button decreaseCount;
 
-    public Score score;
-    public ParseUser parseUser = AppParse._parseUser;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        score = new Score();
 
         increaseCount = (Button) findViewById(R.id.btnPlusOne);
         decreaseCount = (Button) findViewById(R.id.btnMinusOne);
@@ -143,19 +132,6 @@ public class GameActivity extends AppCompatActivity {
 
     public void GameOver() {
         gameScore = _counter;
-        score.setUuidString();
-        score.setOwner(parseUser);
-        score.setScore(_counter);
-        score.saveEventually(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e==null){
-                    Log.d("MyApp","Score saved. User is "+score.getOwner()+". Score Uuid is "+score.getUuidString());
-                }else{
-                    Log.d("MyApp","SaveCallBack Error! Score not saved. ParseException code: "+e.getCode());
-                }
-            }
-        });
         Intent intent = new Intent(GameActivity.this, PostGameActivity.class);
         startActivity(intent);
         super.finish();
