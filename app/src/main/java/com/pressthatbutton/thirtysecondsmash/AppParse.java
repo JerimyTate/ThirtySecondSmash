@@ -1,11 +1,14 @@
 package com.pressthatbutton.thirtysecondsmash;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
 /**
@@ -15,6 +18,7 @@ public class AppParse extends Application {
 
     private String ApplicationID = "E7XJt4pIywhKbpZ0tJKIpqwtHKmqasv1ZmfIk5vo";
     private String ClientKey = "eEg41XmXSQxHKxqZB9nGdB1c2iKYti1GF8C9SHFi";
+    public static final ParseUser _parseUser = null;
 
     @Override
     public void onCreate() {
@@ -22,6 +26,12 @@ public class AppParse extends Application {
 
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Score.class);
+        try{
+            _parseUser.fetchIfNeeded();
+        }catch (ParseException e){
+            Log.d("MyApp","Error with parseUser.fetchIfNeeded()! parseException code: "+e.getCode());
+        }
+
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);
 

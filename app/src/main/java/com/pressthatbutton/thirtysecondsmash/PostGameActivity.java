@@ -15,8 +15,6 @@ public class PostGameActivity extends AppCompatActivity {
     public Button btnPostGameToMain;
     public TextView LastGameScore;
     private String _stringVal;
-    ParseObject gameScore = new ParseObject("GameScore");
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,16 +22,8 @@ public class PostGameActivity extends AppCompatActivity {
 
         //
         LastGameScore = (TextView) findViewById(R.id.txtYourScore);
-        _stringVal = Integer.toString(GameActivity.GameScore);
+        _stringVal = Integer.toString(GameActivity.gameScore);
         LastGameScore.setText(_stringVal);
-
-
-        gameScore.put("score", _stringVal);
-        gameScore.put("playerName", MainActivity.PlayerName);
-
-        ///This line crashes the app for me
-        gameScore.saveInBackground();
-
 
         btnPlayAgain = (Button) findViewById(R.id.btnplayAgain);
         btnPlayAgain.setOnClickListener(new View.OnClickListener() {

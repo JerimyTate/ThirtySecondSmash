@@ -10,11 +10,11 @@
     tools:context="com.pressthatbutton.thirtysecondsmash.SignUpFragment">
 
     <EditText
-        android:id="@+id/edit_txt_signup_email"
+        android:id="@+id/edit_txt_signup_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:hint="Enter Email"/>
+        android:hint="Enter Username"/>
     <EditText
         android:id="@+id/edit_txt_signup_password"
         android:layout_width="match_parent"
@@ -27,5 +27,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="#000"
-        android:text="You can change your User Name in [Change Name]."/>
+        android:text="User Names can have a-z A-Z 0-9 . - _"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:text="Passwords should be at least 8 characters long."/>
 </LinearLayout>

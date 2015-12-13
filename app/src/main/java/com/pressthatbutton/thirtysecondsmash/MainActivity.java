@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     public Button btnChangeName;
     public Button btnMainToLogin;
 
-    public static String PlayerName = "Pl";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

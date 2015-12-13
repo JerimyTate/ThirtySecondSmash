@@ -22,7 +22,7 @@ public class ShowAllHighScores extends AppCompatActivity {
     public Button btnAllToOwn;
 
     public ListView lvAllScores;
-    private List<Score> _scores;
+    private List<Score> _scores = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

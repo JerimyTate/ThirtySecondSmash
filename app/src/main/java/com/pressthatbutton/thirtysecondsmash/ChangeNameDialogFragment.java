@@ -26,7 +26,7 @@ public class ChangeNameDialogFragment extends DialogFragment {
     public TextView currentName;
     public EditText newName;
 
-    public ParseUser parseUser;
+    private ParseUser parseUser = AppParse._parseUser;
     private String _currentNameOfUser = "Unknown User"; //Not yet set.
 
     public ChangeNameDialogFragment() {
@@ -39,6 +39,39 @@ public class ChangeNameDialogFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_change_name_dialog, container, false);
 
+        if(parseUser!=null){
+            _currentNameOfUser = parseUser.getUsername();
+        }
+        currentName = (TextView)getView().findViewById(R.id.txt_display_current_name);
+        currentName.setText(_currentNameOfUser);
+
+        newName = (EditText)getView().findViewById(R.id.edit_txt_new_name);
+        InputFilter filter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                boolean keepOriginal = true;
+                StringBuilder stringBuilder = new StringBuilder(end - start);
+                for (int i = start; i<end;++i){
+                    char c = source.charAt(i);
+                    if(isCharAllowed(c)){
+                        stringBuilder.append(c);
+                    }else{
+                        keepOriginal = false;
+                    }
+                }
+                if(keepOriginal){
+                    return null;
+                }else {
+                    return stringBuilder;
+                }
+            }
+
+            private boolean isCharAllowed(char c){
+                return Character.isLetterOrDigit(c) || Character.isSpaceChar(c)
+                        || Character.valueOf(c).compareTo('@')==0 || Character.valueOf(c).compareTo('.')==0;
+            }
+        };
+        newName.setFilters(new InputFilter[]{filter});
         return view;
     }
 
@@ -74,47 +107,6 @@ public class ChangeNameDialogFragment extends DialogFragment {
                 });
         return builder.create();
     }
-
-/*    private void SetUpFragmentXML(){
-        parseUser = ParseUser.getCurrentUser();
-
-        currentName = (TextView)getView().findViewById(R.id.txt_display_current_name);
-        currentName.setText(_currentNameOfUser);
-
-        newName = (EditText)getView().findViewById(R.id.edit_txt_new_name);
-        InputFilter filter = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                boolean keepOriginal = true;
-                StringBuilder stringBuilder = new StringBuilder(end - start);
-                for (int i = start; i<end;++i){
-                    char c = source.charAt(i);
-                    if(isCharAllowed(c)){
-                        stringBuilder.append(c);
-                    }else{
-                        keepOriginal = false;
-                    }
-                }
-                if(keepOriginal){
-                    return null;
-                }else {
-                    return stringBuilder;
-                }
-            }
-
-            private boolean isCharAllowed(char c){
-                return Character.isLetterOrDigit(c) || Character.isSpaceChar(c)
-                        || Character.valueOf(c).compareTo('@')==0 || Character.valueOf(c).compareTo('.')==0;
-            }
-        };
-        newName.setFilters(new InputFilter[]{filter});
-
-        if(parseUser.getSessionToken()==null){
-            //No user??
-        }else {
-            _currentNameOfUser = parseUser.getUsername();
-        }
-    }*/
 
     //Displays toast
     private void failedNameChange(){

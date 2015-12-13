@@ -35,7 +35,7 @@ public class LoginScreen extends AppCompatActivity {
 
     protected String email;
 
-    public ParseUser parseUser;
+    public ParseUser parseUser = AppParse._parseUser;
 
     private EditText userName;
     private EditText password;
@@ -55,6 +55,9 @@ public class LoginScreen extends AppCompatActivity {
         password = (EditText) findViewById(R.id.edit_txt_password);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
+        if(parseUser!= null){
+            logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
+        }
 
         //Filters out characters that are not letters or digits
         InputFilter filter = new InputFilter() {
@@ -110,12 +113,13 @@ public class LoginScreen extends AppCompatActivity {
                         } else if (user.isNew()) {
                             Log.d("MyApp", "User signed up and logged in through Facebook!");
                             getUserDetailsFromFB();
-                            saveNewUser();
+                            saveNewUser(true);
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                         } else if(!user.isNew()){
                             Log.d("MyApp", "User logged in through Facebook!");
                             getUserDetailsFromFB();
+                            saveNewUser(false);
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                         }else{
@@ -164,7 +168,7 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-    private void saveNewUser() {
+    private void saveNewUser(final boolean isNew) {
         parseUser = ParseUser.getCurrentUser();
         parseUser.setUsername(email);
         parseUser.setEmail(email);
@@ -177,7 +181,11 @@ public class LoginScreen extends AppCompatActivity {
                     Toast.makeText(LoginScreen.this, "Error! Parse Exception Code: " + e.getCode(), Toast.LENGTH_LONG).show();
                 } else {
                     //Object saved successfully.
-                    Toast.makeText(LoginScreen.this, "New user, " + email + ", signed up.", Toast.LENGTH_LONG).show();
+                    if(isNew){
+                        Toast.makeText(LoginScreen.this, "New user, " + email + ", signed up.", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(LoginScreen.this, "Returning user, " + email + ", successfully logged in.", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -189,9 +197,6 @@ public class LoginScreen extends AppCompatActivity {
             public void onCompleted(GraphResponse response) {
                 try{
                     email = response.getJSONObject().getString("email");
-                    parseUser = ParseUser.getCurrentUser();
-                    parseUser.setUsername(email);
-                    parseUser.setEmail(email);
                     //Print everything in Log debug
                     Log.d("MyApp",response.getRawResponse());
                 }

@@ -22,10 +22,10 @@ public class ShowOwnHighScores extends AppCompatActivity {
     public Button btnOwnToMain;
     public Button btnOwnToAll;
 
-    public ParseUser parseUser;
+    public ParseUser parseUser = AppParse._parseUser;
 
     public ListView lvOwnScores;
-    private List<Score> _scores;
+    private List<Score> _scores = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

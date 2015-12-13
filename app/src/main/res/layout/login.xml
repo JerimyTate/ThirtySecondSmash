@@ -48,7 +48,7 @@
         android:focusable="true"
         android:textColorHighlight="#ff7eff15"
         android:textColorHint="#0b05ff"
-        android:hint="Enter User Name or Email"/>
+        android:hint="Enter User Name"/>
 
     <EditText
         android:id="@+id/edit_txt_password"
