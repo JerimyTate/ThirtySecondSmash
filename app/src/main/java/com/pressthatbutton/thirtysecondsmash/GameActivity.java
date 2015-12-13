@@ -19,7 +19,7 @@ public class GameActivity extends AppCompatActivity {
     int plusOneID;
     int minusOneID;
 
-   public static int GameScore;
+    public static int GameScore;
 
 
     ///////////////SETTINGS///////////////////
@@ -71,28 +71,28 @@ public class GameActivity extends AppCompatActivity {
 
         //beginnings of an incrementing counter
         increaseCount.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 _value = (TextView) findViewById(R.id.txt_game_score);
-                 if (countdown_number.getText() != "End") {
-                     incrementScore();
+            @Override
+            public void onClick(View v) {
+                _value = (TextView) findViewById(R.id.txt_game_score);
+                if (countdown_number.getText() != "End") {
+                    incrementScore();
 
-                     if (randInt(minPercent, maxPercent) < percentSwitch) {
-                         switchModes();
-                         new CountDownTimer(1000, 1000) {
+                    if (randInt(minPercent, maxPercent) < percentSwitch) {
+                        switchModes();
+                        new CountDownTimer(1000, 1000) {
 
-                             public void onTick(long millisUntilFinished) {
+                            public void onTick(long millisUntilFinished) {
 
-                             }
+                            }
 
-                             public void onFinish() {
-                                 switchBack();
-                             }
-                         }.start();
-                     }
-                 }
-             }
-         });
+                            public void onFinish() {
+                                switchBack();
+                            }
+                        }.start();
+                    }
+                }
+            }
+        });
 
         decreaseCount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
         decreaseCount.setVisibility(View.GONE);
     }
 
-    public void GameOver(){
+    public void GameOver() {
         GameScore = _counter;
         Intent intent = new Intent(GameActivity.this, PostGameActivity.class);
         startActivity(intent);
