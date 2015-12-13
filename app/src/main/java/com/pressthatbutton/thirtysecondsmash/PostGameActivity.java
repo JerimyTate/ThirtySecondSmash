@@ -36,6 +36,7 @@ public class PostGameActivity extends AppCompatActivity {
             score.setUuidString();
             score.setOwner(parseUser);
             score.setScore(GameActivity.gameScore);
+            Log.d("MyApp","Before Save, Uuid: "+score.getUuidString()+"; Owner: "+score.getOwner().toString()+"; Score: "+score.getScore());
             score.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
