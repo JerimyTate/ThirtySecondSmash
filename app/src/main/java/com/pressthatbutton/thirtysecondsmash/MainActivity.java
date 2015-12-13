@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -124,10 +125,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Launch Change Name Dialog
     protected void ShowChangeNameDialog() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        ChangeNameDialogFragment newFragment = new ChangeNameDialogFragment();
-
-        newFragment.show(fragmentManager, "ChangeNameDialog");
+        Bundle bundle = new Bundle();
+        ChangeNameDialogFragment changeNameDialogFragment = new ChangeNameDialogFragment();
+        changeNameDialogFragment.onCreateDialog(bundle);
     }
 
     //Launch Log In Screen when clicked

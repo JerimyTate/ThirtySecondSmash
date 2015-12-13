@@ -45,33 +45,33 @@ public class ChangeNameDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        SetUpFragmentXML();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //null parent because it is a dialog
         builder.setView(inflater.inflate(R.layout.fragment_change_name_dialog,null))
-        .setPositiveButton(R.string.name_change_dialog_okay, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (newName.getText().toString().trim().isEmpty()) {
-                    //Empty Field
-                    failedNameChange();
-                }else{
-                    //Not empty field
-                    ChangeNameParseUser(newName.getText().toString());
-                }
-                dismiss();
-            }
-        })
-        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-                failedNameChange();
-            }
-        });
+                .setPositiveButton(R.string.name_change_dialog_okay, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (newName.getText().toString().trim().isEmpty()) {
+                            //Empty Field
+                            failedNameChange();
+                        } else {
+                            //Not empty field
+                            ChangeNameParseUser(newName.getText().toString());
+                        }
+                        dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dismiss();
+                        failedNameChange();
+                    }
+                });
+        SetUpFragmentXML();
         return builder.create();
     }
 
