@@ -33,6 +33,8 @@ public class AppParse extends Application {
         _parseUser.setUsername("Unknown User");
 
         Parse.initialize(this, ApplicationID, ClientKey);
+        ParseUser.enableRevocableSessionInBackground();
+
         ParseFacebookUtils.initialize(this);
 
         ParseInstallation.getCurrentInstallation().saveInBackground();
