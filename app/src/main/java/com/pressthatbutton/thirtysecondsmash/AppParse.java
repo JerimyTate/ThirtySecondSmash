@@ -20,11 +20,11 @@ public class AppParse extends Application {
     public void onCreate() {
         super.onCreate();
 
+        Parse.enableLocalDatastore(this);
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseFacebookUtils.initialize(this);
 
         ParseInstallation.getCurrentInstallation().saveInBackground();
-
     }
 }
 

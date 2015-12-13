@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".AppParse"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,11 +25,17 @@
 
         <meta-data
             android:name="com.parse.APPLICATION_ID"
-            android:value="E7XJt4pIywhKbpZ0tJKIpqwtHKmqasv1ZmfIk5vo" />
+            android:value="@string/parse_app_id" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="eEg41XmXSQxHKxqZB9nGdB1c2iKYti1GF8C9SHFi" />
+            android:value="@string/parse_client_key" />
 
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
 
         <activity
             android:name=".GameActivity"
@@ -38,17 +45,51 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
-
-
-
-
         </activity>
 
-        <activity android:name=".ShowAllHighScores" />
-        <activity android:name=".ShowOwnHighScores" />
-        <activity android:name=".PlayerInstructions" />
-        <activity android:name=".PostGameActivity"/>
+        <activity android:name=".ShowAllHighScores"
+            android:label="@string/title_activity_show_all_high_scores"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
+        </activity>
 
+        <activity android:name=".ShowOwnHighScores"
+            android:label="@string/title_activity_show_own_high_scores"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
+        </activity>
+
+        <activity android:name=".PlayerInstructions"
+            android:label="@string/title_activity_player_instructions"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
+        </activity>
+
+        <activity android:name=".PostGameActivity"
+            android:label="@string/title_activity_post_game"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
+        </activity>
+
+        <activity android:name=".LoginScreen"
+            android:label="@string/title_activity_login"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
+        </activity>
     </application>
-
 </manifest>

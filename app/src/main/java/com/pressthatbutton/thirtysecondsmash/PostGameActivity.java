@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.parse.ParseAnalytics;
 
 import com.parse.Parse;
@@ -38,18 +39,19 @@ public class PostGameActivity extends AppCompatActivity {
         gameScore.saveInBackground();
 
 
-        btnPlayAgain = (Button)findViewById(R.id.btnplayAgain);
+        btnPlayAgain = (Button) findViewById(R.id.btnplayAgain);
         btnPlayAgain.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {StartGame(v);}
+            public void onClick(View v) {
+                StartGame(v);
+            }
         });
 
     }
 
-        protected void StartGame(View view)
-        {
-            Intent intent = new Intent(PostGameActivity.this, GameActivity.class);
-            startActivity(intent);
-        }
+    protected void StartGame(View view) {
+        Intent intent = new Intent(PostGameActivity.this, GameActivity.class);
+        startActivity(intent);
+    }
 
 }

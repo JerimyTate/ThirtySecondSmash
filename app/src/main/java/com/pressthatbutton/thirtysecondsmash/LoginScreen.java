@@ -55,9 +55,6 @@ public class LoginScreen extends AppCompatActivity {
         password = (EditText) findViewById(R.id.edit_txt_password);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
-        if(!parseUser.getSessionToken().isEmpty()){
-            logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
-        }
 
         //Filters out characters that are not letters or digits
         InputFilter filter = new InputFilter() {
@@ -119,8 +116,6 @@ public class LoginScreen extends AppCompatActivity {
                         } else if(!user.isNew()){
                             Log.d("MyApp", "User logged in through Facebook!");
                             getUserDetailsFromFB();
-                            parseUser.setUsername(email);
-                            parseUser.setEmail(email);
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                         }else{
@@ -135,7 +130,6 @@ public class LoginScreen extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parseUser = ParseUser.getCurrentUser();
                 //Calls method FieldsAreEmpty() that returns a boolean.
                 if (!FieldsAreEmpty()) {
                     //Fields are not empty
@@ -195,6 +189,9 @@ public class LoginScreen extends AppCompatActivity {
             public void onCompleted(GraphResponse response) {
                 try{
                     email = response.getJSONObject().getString("email");
+                    parseUser = ParseUser.getCurrentUser();
+                    parseUser.setUsername(email);
+                    parseUser.setEmail(email);
                     //Print everything in Log debug
                     Log.d("MyApp",response.getRawResponse());
                 }

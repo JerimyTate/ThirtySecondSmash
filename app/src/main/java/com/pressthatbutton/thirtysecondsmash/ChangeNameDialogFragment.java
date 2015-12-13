@@ -35,8 +35,48 @@ public class ChangeNameDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_change_name_dialog, container, false);
+        SetUpFragmentXML();
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        //null parent because it is a dialog
+        builder.setView(inflater.inflate(R.layout.fragment_change_name_dialog,null))
+                .setPositiveButton(R.string.name_change_dialog_okay, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (newName.getText().toString().trim().isEmpty()) {
+                            //Empty Field
+                            failedNameChange();
+                        } else {
+                            //Not empty field
+                            ChangeNameParseUser(newName.getText().toString());
+                        }
+                        dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dismiss();
+                        failedNameChange();
+                    }
+                });
+        SetUpFragmentXML();
+        return builder.create();
+    }
+
+    private void SetUpFragmentXML(){
         parseUser = ParseUser.getCurrentUser();
-        _currentNameOfUser = parseUser.getUsername();
 
         currentName = (TextView)getView().findViewById(R.id.txt_display_current_name);
         currentName.setText(_currentNameOfUser);
@@ -69,40 +109,11 @@ public class ChangeNameDialogFragment extends DialogFragment {
         };
         newName.setFilters(new InputFilter[]{filter});
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_name_dialog, container, false);
-    }
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        //null parent because it is a dialog
-        builder.setView(inflater.inflate(R.layout.fragment_change_name_dialog,null))
-        .setPositiveButton(R.string.name_change_dialog_okay, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (newName.getText().toString().trim().isEmpty()) {
-                    //Empty Field
-                    failedNameChange();
-                }else{
-                    //Not empty field
-                    ChangeNameParseUser(newName.getText().toString());
-                }
-                dismiss();
-            }
-        })
-        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-                failedNameChange();
-            }
-        });
-        return builder.create();
+        if(parseUser.getSessionToken()==null){
+            //No user??
+        }else {
+            _currentNameOfUser = parseUser.getUsername();
+        }
     }
 
     //Displays toast
