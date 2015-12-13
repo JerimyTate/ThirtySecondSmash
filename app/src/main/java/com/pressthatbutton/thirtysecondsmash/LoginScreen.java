@@ -51,8 +51,6 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        parseUser = ParseUser.getCurrentUser();
-
         userName = (EditText) findViewById(R.id.edit_txt_user_name);
         password = (EditText) findViewById(R.id.edit_txt_password);
 
@@ -137,6 +135,7 @@ public class LoginScreen extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                parseUser = ParseUser.getCurrentUser();
                 //Calls method FieldsAreEmpty() that returns a boolean.
                 if (!FieldsAreEmpty()) {
                     //Fields are not empty
@@ -172,6 +171,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void saveNewUser() {
+        parseUser = ParseUser.getCurrentUser();
         parseUser.setUsername(email);
         parseUser.setEmail(email);
 

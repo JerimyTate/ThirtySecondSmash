@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.parse.ParseAnalytics;
+
+import com.parse.Parse;
 import com.parse.ParseObject;
 
 import org.w3c.dom.Text;
@@ -17,10 +20,12 @@ public class PostGameActivity extends AppCompatActivity {
     private String _stringVal;
     ParseObject gameScore = new ParseObject("GameScore");
 
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_game);
+
+        //
         LastGameScore = (TextView) findViewById(R.id.txtYourScore);
         _stringVal = Integer.toString(GameActivity.GameScore);
         LastGameScore.setText(_stringVal);
@@ -29,8 +34,8 @@ public class PostGameActivity extends AppCompatActivity {
         gameScore.put("score", _stringVal);
         gameScore.put("playerName", MainActivity.PlayerName);
 
-        //This line crashes the app for me
-        //gameScore.saveInBackground();
+        ///This line crashes the app for me
+        gameScore.saveInBackground();
 
 
         btnPlayAgain = (Button)findViewById(R.id.btnplayAgain);
