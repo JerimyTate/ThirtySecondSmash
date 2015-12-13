@@ -7,16 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.parse.ParseAnalytics;
-
-import com.parse.Parse;
 import com.parse.ParseObject;
-
-import org.w3c.dom.Text;
 
 public class PostGameActivity extends AppCompatActivity {
 
     public Button btnPlayAgain;
+    public Button btnPostGameToMain;
     public TextView LastGameScore;
     private String _stringVal;
     ParseObject gameScore = new ParseObject("GameScore");
@@ -47,11 +43,23 @@ public class PostGameActivity extends AppCompatActivity {
             }
         });
 
+        btnPostGameToMain = (Button) findViewById(R.id.btnPostGameToMain);
+        btnPostGameToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BackToMain(v);
+            }
+        });
     }
 
-    protected void StartGame(View view) {
+    private void StartGame(View view) {
         Intent intent = new Intent(PostGameActivity.this, GameActivity.class);
         startActivity(intent);
     }
 
+    //Return to Main Activity when clicked
+    private void BackToMain(View view)
+    {
+        super.finish();
+    }
 }

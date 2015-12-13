@@ -138,6 +138,7 @@ public class GameActivity extends AppCompatActivity {
         GameScore = _counter;
         Intent intent = new Intent(GameActivity.this, PostGameActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     /**
