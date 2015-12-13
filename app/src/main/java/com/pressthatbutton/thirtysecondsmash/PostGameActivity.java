@@ -40,7 +40,7 @@ public class PostGameActivity extends AppCompatActivity {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        Log.d("MyApp", "Score saved. User is " + score.getOwner().toString() + ". Score Uuid is " + score.getUuidString());
+                        Log.d("MyApp", "Score saved. User is " + score.getOwner() + ". Score Uuid is " + score.getUuidString());
                     } else {
                         Log.d("MyApp", "SaveCallBack Error! Score not saved. ParseException code: " + e.getCode());
                     }
@@ -48,6 +48,7 @@ public class PostGameActivity extends AppCompatActivity {
             });
         }catch (Exception e){
             Log.d("MyApp","Score error: "+e.getMessage());
+            e.printStackTrace();
         }
 
         btnPlayAgain = (Button) findViewById(R.id.btnplayAgain);

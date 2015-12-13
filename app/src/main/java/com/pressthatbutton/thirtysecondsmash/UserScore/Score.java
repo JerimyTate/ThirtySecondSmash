@@ -19,8 +19,8 @@ public class Score extends ParseObject {
         put("owner", currentUser);
     }
 
-    public String getOwner(){
-        return getString("owner");
+    public ParseUser getOwner(){
+        return getParseUser("owner");
     }
 
     public void setUuidString() {
