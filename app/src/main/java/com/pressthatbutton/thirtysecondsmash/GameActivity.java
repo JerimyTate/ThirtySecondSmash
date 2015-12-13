@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.parse.ParseUser;
-
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
@@ -21,7 +19,7 @@ public class GameActivity extends AppCompatActivity {
     int plusOneID;
     int minusOneID;
 
-    public static int GameScore;
+    public static int gameScore;
 
     ///////////////SETTINGS///////////////////
     //settings for determining how often button will switch
@@ -41,8 +39,6 @@ public class GameActivity extends AppCompatActivity {
     private String _stringVal;
     private Button increaseCount;
     private Button decreaseCount;
-
-    ParseUser parseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void GameOver() {
-        GameScore = _counter;
+        gameScore = _counter;
         Intent intent = new Intent(GameActivity.this, PostGameActivity.class);
         startActivity(intent);
         super.finish();

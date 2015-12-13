@@ -27,12 +27,12 @@ public class Score extends ParseObject {
         return getString("uuid");
     }
 
-    public void setScore(String score) {
+    public void setScore(Integer score) {
         put("score", score);
     }
 
-    public String getScore(){
-        return getString("score");
+    public Integer getScore(){
+        return getInt("score");
     }
 
     public static ParseQuery<Score> getQuery(){

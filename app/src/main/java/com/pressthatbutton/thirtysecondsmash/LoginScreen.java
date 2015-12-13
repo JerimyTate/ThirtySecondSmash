@@ -3,6 +3,9 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -35,7 +38,7 @@ public class LoginScreen extends AppCompatActivity {
 
     protected String email;
 
-    public ParseUser parseUser;
+    public ParseUser parseUser = AppParse._parseUser;
 
     private EditText userName;
     private EditText password;
@@ -55,6 +58,9 @@ public class LoginScreen extends AppCompatActivity {
         password = (EditText) findViewById(R.id.edit_txt_password);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
+        if(parseUser!= null){
+            logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
+        }
 
         //Filters out characters that are not letters or digits
         InputFilter filter = new InputFilter() {
@@ -88,10 +94,11 @@ public class LoginScreen extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Bring up Dialog box to SAVE new Parse User.
-                //NEED TO WORK ON!
-                Intent intent = new Intent(LoginScreen.this, MainActivity.class);
-                startActivity(intent);
+                Fragment fragment = new SignUpFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_signup_fragment, fragment);
+                fragmentTransaction.commit();
             }
         });
 
@@ -104,18 +111,20 @@ public class LoginScreen extends AppCompatActivity {
                     public void done(ParseUser user, ParseException err) {
                         if(err != null){
                             Log.d("MyApp", "Error! Parse Exception Code: " + err.getCode());
+                            err.printStackTrace();
                         }
                         if (user == null) {
                             Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                         } else if (user.isNew()) {
                             Log.d("MyApp", "User signed up and logged in through Facebook!");
                             getUserDetailsFromFB();
-                            saveNewUser();
+                            saveNewUser(true);
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                         } else if(!user.isNew()){
                             Log.d("MyApp", "User logged in through Facebook!");
                             getUserDetailsFromFB();
+                            saveNewUser(false);
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                         }else{
@@ -152,7 +161,7 @@ public class LoginScreen extends AppCompatActivity {
                                 Toast.makeText(LoginScreen.this, "Username and/or Password does not match Parse's records.", Toast.LENGTH_LONG).show();
                             } else {
                                 //An error occurred.
-                                Toast.makeText(LoginScreen.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
                             }
                         }
                     });
@@ -164,7 +173,7 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-    private void saveNewUser() {
+    private void saveNewUser(final boolean isNew) {
         parseUser = ParseUser.getCurrentUser();
         parseUser.setUsername(email);
         parseUser.setEmail(email);
@@ -175,9 +184,14 @@ public class LoginScreen extends AppCompatActivity {
                 if (e != null) {
                     //Save did not succeed.
                     Toast.makeText(LoginScreen.this, "Error! Parse Exception Code: " + e.getCode(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 } else {
                     //Object saved successfully.
-                    Toast.makeText(LoginScreen.this, "New user, " + email + ", signed up.", Toast.LENGTH_LONG).show();
+                    if (isNew) {
+                        Toast.makeText(LoginScreen.this, "New user, " + email + ", signed up.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(LoginScreen.this, "Returning user, " + email + ", successfully logged in.", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -189,9 +203,6 @@ public class LoginScreen extends AppCompatActivity {
             public void onCompleted(GraphResponse response) {
                 try{
                     email = response.getJSONObject().getString("email");
-                    parseUser = ParseUser.getCurrentUser();
-                    parseUser.setUsername(email);
-                    parseUser.setEmail(email);
                     //Print everything in Log debug
                     Log.d("MyApp",response.getRawResponse());
                 }

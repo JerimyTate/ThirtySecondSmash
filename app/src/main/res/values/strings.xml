@@ -7,6 +7,10 @@
     <string name="name_change_dialog_okay">Change Name</string>
     <string name="name_change_dialog_cancel">Cancel</string>
 
+    <string name="signup_dialog_title">New User Sign Up</string>
+    <string name="signup_dialog_okay">Sign Up</string>
+    <string name="signup_dialog_cancel">Cancel</string>
+
     <!-- Login Screen Text? -->
     <string name="hello_world">Hello world!</string>
 

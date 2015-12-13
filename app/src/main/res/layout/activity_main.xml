@@ -78,15 +78,6 @@
             android:background="@color/colorDarkBlue"
             android:text="Instructions"/>
         <Button
-            android:id="@+id/btnChangeName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="3dp"
-            android:textColor="#fff"
-            android:background="@color/colorDarkBlue"
-            android:text="Change Name"/>
-        <Button
             android:id="@+id/btnMainToLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
