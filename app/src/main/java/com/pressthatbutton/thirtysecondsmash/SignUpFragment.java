@@ -90,6 +90,7 @@ public class SignUpFragment extends Fragment{
                                 getActivity().finish();
                             } else {
                                 Toast.makeText(getContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG).show();
+                                Log.d("MyApp", "Error! ParseException code: " + e.getCode());
                                 e.printStackTrace();
                             }
                         }

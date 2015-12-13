@@ -59,7 +59,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
                 public void done(List<Score> list, ParseException e) {
                     if (e == null) {
                         for (Score s : list) {
-                            if (s.getOwner().compareTo(parseUser.getUsername()) == 0) {
+                            if (s.getOwner().getUsername().compareTo(parseUser.getUsername()) == 0) {
                                 _scores.add(s);
                             }
                         }
