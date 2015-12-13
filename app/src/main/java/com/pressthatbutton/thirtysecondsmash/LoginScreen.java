@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button btnLogin;
     private Button btnFacebook;
     private Button btnSignUp;
+    public static LinearLayout ll_log_in_components;
 
     protected String email;
 
@@ -56,6 +58,7 @@ public class LoginScreen extends AppCompatActivity {
 
         userName = (EditText) findViewById(R.id.edit_txt_user_name);
         password = (EditText) findViewById(R.id.edit_txt_password);
+        ll_log_in_components = (LinearLayout)findViewById(R.id.container_log_in_components);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
         if(parseUser!= null){
@@ -94,6 +97,7 @@ public class LoginScreen extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ll_log_in_components.setVisibility(View.GONE);
                 Fragment fragment = new SignUpFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

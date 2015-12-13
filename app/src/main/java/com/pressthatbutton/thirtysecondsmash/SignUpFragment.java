@@ -1,6 +1,5 @@
 package com.pressthatbutton.thirtysecondsmash;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -74,6 +75,7 @@ public class SignUpFragment extends Fragment{
                 if (edit_txt_username.getText().toString().trim().isEmpty() || edit_txt_password.getText().length() < 8) {
                     //Empty Field
                     Toast.makeText(getContext(), "Error! Username was blank and/or Password length was under 8 characters.", Toast.LENGTH_SHORT).show();
+                    Log.d("MyApp","SignUpFragment Empty Field Error.");
                 } else {
                     //Not empty field
                     parseUser.setUsername(edit_txt_username.getText().toString());
@@ -83,6 +85,9 @@ public class SignUpFragment extends Fragment{
                         public void done(ParseException e) {
                             if (e == null) {
                                 Toast.makeText(getContext(), "Signed up as " + parseUser.getUsername(), Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getContext(),MainActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
                             } else {
                                 Toast.makeText(getContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
@@ -91,9 +96,6 @@ public class SignUpFragment extends Fragment{
                     });
                 }
                 hideFragment();
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +108,10 @@ public class SignUpFragment extends Fragment{
     }
 
     private void hideFragment(){
+        LoginScreen.ll_log_in_components.setVisibility(View.VISIBLE);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_signup_fragment,null);
+        fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.container_signup_fragment));
         fragmentTransaction.commit();
     }
 }
