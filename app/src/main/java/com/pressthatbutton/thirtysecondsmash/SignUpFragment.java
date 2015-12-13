@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parse.ParseUser;
+
 public class SignUpFragment extends DialogFragment {
 
+    ParseUser parseUser;
 
     public SignUpFragment() {
         // Required empty public constructor

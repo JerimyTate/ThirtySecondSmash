@@ -100,25 +100,25 @@ public class MainActivity extends AppCompatActivity {
 
     //Launch Game when clicked
     protected void StartGame(View view) {
-        Intent intent = new Intent(view.getContext(), GameActivity.class);
+        Intent intent = new Intent(MainActivity.this, GameActivity.class);
         startActivity(intent);
     }
 
     //Launch High All High Scores when clicked
     protected void ShowAllHighScores(View view) {
-        Intent intent = new Intent(view.getContext(), ShowAllHighScores.class);
+        Intent intent = new Intent(MainActivity.this, ShowAllHighScores.class);
         startActivity(intent);
     }
 
     //Launch High Own High Scores when clicked
     protected void ShowMyHighScores(View view) {
-        Intent intent = new Intent(view.getContext(), ShowOwnHighScores.class);
+        Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
         startActivity(intent);
     }
 
     //Launch Instructions when pressed
     protected void PlayerInstructions(View view) {
-        Intent intent = new Intent(view.getContext(), PlayerInstructions.class);
+        Intent intent = new Intent(MainActivity.this, PlayerInstructions.class);
         startActivity(intent);
     }
 
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Launch Log In Screen when clicked
     protected void ShowLoginScreen(View view){
-        Intent intent = new Intent(view.getContext(), LoginScreen.class);
+        Intent intent = new Intent(MainActivity.this, LoginScreen.class);
         startActivity(intent);
     }
 }

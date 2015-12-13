@@ -19,7 +19,7 @@ public class ShowAllHighScores extends AppCompatActivity {
         btnAllToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowMyHighScores(v);
+                BackToMain(v);
             }
         });
 
@@ -27,7 +27,7 @@ public class ShowAllHighScores extends AppCompatActivity {
         btnAllToOwn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BackToMain(v);
+                ShowMyHighScores(v);
             }
         });
     }
@@ -35,14 +35,14 @@ public class ShowAllHighScores extends AppCompatActivity {
     //Launch Own High Scores when clicked
     private void ShowMyHighScores(View view)
     {
-        Intent intent = new Intent(view.getContext(), ShowOwnHighScores.class);
+        Intent intent = new Intent(ShowAllHighScores.this, ShowOwnHighScores.class);
         startActivity(intent);
+        super.finish();
     }
 
     //Return to Main Activity when clicked
     private void BackToMain(View view)
     {
-        Intent intent = new Intent(view.getContext(), MainActivity.class);
-        startActivity(intent);
+        super.finish();
     }
 }

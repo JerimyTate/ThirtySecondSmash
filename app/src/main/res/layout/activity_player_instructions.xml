@@ -22,22 +22,22 @@
         android:id="@+id/txt_instructions_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
         android:layout_marginBottom="10dp"
         android:text="Load Part 1"/>
     <TextView
         android:id="@+id/txt_instructions_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="50dp"
         android:text="Load Part 2"/>
     <Button
         android:id="@+id/btnHelpToMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorLightBlue"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textColor="#fff"
         android:text="Back to Main"/>
 </LinearLayout>
