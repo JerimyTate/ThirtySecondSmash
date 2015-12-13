@@ -55,6 +55,7 @@ public class PostGameActivity extends AppCompatActivity {
     private void StartGame(View view) {
         Intent intent = new Intent(PostGameActivity.this, GameActivity.class);
         startActivity(intent);
+        super.finish();
     }
 
     //Return to Main Activity when clicked
