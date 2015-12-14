@@ -52,6 +52,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
 
         Toast.makeText(getBaseContext(), "Loading Own Scores...", Toast.LENGTH_LONG);
         try {
+            _scores.clear();
             ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
             query.orderByDescending("score");
             query.whereEqualTo("owner",parseUser);
@@ -61,7 +62,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
                 public void done(List<Score> list, ParseException e) {
                     if (e == null) {
                         Log.d("MyApp","ShowOwnHighScores Score List size: "+list.size());
-                        _scores = list;
+                        _scores.addAll(list);
                     } else {
                         Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
                         e.printStackTrace();
