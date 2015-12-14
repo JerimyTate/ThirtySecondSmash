@@ -10,17 +10,19 @@ import android.widget.TextView;
 
 import com.pressthatbutton.thirtysecondsmash.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllScoresAdapter extends ArrayAdapter<Score> {
     public static final int LIST_MENU_ITEM_LAYOUT = android.support.design.R.layout.abc_list_menu_item_layout;
-    private final List<Score> _scores;
+    private static List<Score> _scores = new ArrayList<>();
     private static Context _context;
 
     public AllScoresAdapter(Context context, int resource, List<Score> scores) {
         super(context, resource, scores);
         _context = context;
-        this._scores = scores;
+        _scores.clear();
+        _scores.addAll(scores);
     }
 
     @Override
@@ -32,10 +34,11 @@ public class AllScoresAdapter extends ArrayAdapter<Score> {
 
         //For AllHighScores
         try {
+            Score tempScoreHolder = _scores.get(position);
             TextView txtAllScoresItem = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item);
-            txtAllScoresItem.setText(_scores.get(position).getScore().toString());
+            txtAllScoresItem.setText(tempScoreHolder.getScore().toString());
             TextView txtAllScoresItemOwner = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item_user_name);
-            txtAllScoresItemOwner.setText(_scores.get(position).getOwner().getUsername());
+            txtAllScoresItemOwner.setText(tempScoreHolder.getOwner().getUsername());
         }catch (Exception e){
             Log.d("MyApp", "AllScoresAdapter Error: "+e.getMessage());
             e.printStackTrace();

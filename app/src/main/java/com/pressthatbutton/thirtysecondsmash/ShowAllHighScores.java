@@ -46,7 +46,7 @@ public class ShowAllHighScores extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(getBaseContext(), "Loading All High Scores...", Toast.LENGTH_LONG);
+        Toast.makeText(getBaseContext(), "Loading All High Scores...", Toast.LENGTH_LONG).show();
         try {
             _scores.clear();
             ParseQuery<Score> query = ParseQuery.getQuery("Score");
@@ -56,16 +56,16 @@ public class ShowAllHighScores extends AppCompatActivity {
                 @Override
                 public void done(List<Score> list, ParseException e) {
                     if (e == null) {
-                        Log.d("MyApp","ShowAllHighScores Score List size: "+list.size());
+                        Log.d("MyApp", "ShowAllHighScores Score List size: " + list.size());
                         _scores.addAll(list);
+                        lvAllScores = (ListView) findViewById(R.id.all_score_list_view);
+                        lvAllScores.setAdapter(new AllScoresAdapter(getBaseContext(), AllScoresAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
                     } else {
-                        Log.d("MyApp","Error! ShowAllHighScores findInBackground ParseException code: " + e.getCode());
+                        Log.d("MyApp", "Error! ShowAllHighScores findInBackground ParseException code: " + e.getCode());
                         e.printStackTrace();
                     }
                 }
             });
-            lvAllScores = (ListView)findViewById(R.id.all_score_list_view);
-            lvAllScores.setAdapter(new AllScoresAdapter(getBaseContext(), AllScoresAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
         }catch (Exception e){
             Log.d("MyApp","ShowAllHighScore ParseQuery Error: "+e.getMessage());
             e.printStackTrace();

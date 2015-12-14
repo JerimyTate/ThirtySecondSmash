@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.AllScoresAdapter;
@@ -51,7 +50,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(getBaseContext(), "Loading Own Scores...", Toast.LENGTH_LONG);
+        Toast.makeText(getBaseContext(), "Loading Own Scores...", Toast.LENGTH_LONG).show();
         try {
             _scores.clear();
             ParseQuery<Score> query = ParseQuery.getQuery("Score");
@@ -65,14 +64,14 @@ public class ShowOwnHighScores extends AppCompatActivity {
                     if (e == null) {
                         Log.d("MyApp", "ShowOwnHighScores Score List size: " + list.size());
                         _scores.addAll(list);
+                        lvOwnScores = (ListView) findViewById(R.id.own_score_list_view);
+                        lvOwnScores.setAdapter(new AllScoresAdapter(getBaseContext(), OwnScoreAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
                     } else {
-                        Log.d("MyApp","Error! ShowOwnHighScores findInBackground ParseException code: " + e.getCode());
+                        Log.d("MyApp", "Error! ShowOwnHighScores findInBackground ParseException code: " + e.getCode());
                         e.printStackTrace();
                     }
                 }
             });
-            lvOwnScores = (ListView)findViewById(R.id.own_score_list_view);
-            lvOwnScores.setAdapter(new AllScoresAdapter(getBaseContext(), OwnScoreAdapter.LIST_MENU_ITEM_LAYOUT, _scores));
         }catch (Exception e){
             Log.d("MyApp", "ShowOwnHighScore ParseQuery Error: " + e.getMessage());
             e.printStackTrace();
