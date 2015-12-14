@@ -56,7 +56,7 @@
                 android:value="com.pressthatbutton.thirtysecondsmash.MainActivity" />
         </activity>
 
-        <activity android:name=".ShowOwnHighSCores"
+        <activity android:name=".ShowOwnHighScores"
             android:label="@string/title_activity_show_own_high_scores"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

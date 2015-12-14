@@ -61,30 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 ShowLoginScreen(v);
             }
         });
-
-        if(!parseUser.isAuthenticated()){
-            btnMainToAll.setVisibility(View.GONE);
-            btnMainToOwn.setVisibility(View.GONE);
-            btnStartGame.setVisibility(View.GONE);
-        }else{
-            btnMainToAll.setVisibility(View.VISIBLE);
-            btnMainToOwn.setVisibility(View.VISIBLE);
-            btnStartGame.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        if(!parseUser.isAuthenticated()){
-            btnMainToAll.setVisibility(View.GONE);
-            btnMainToOwn.setVisibility(View.GONE);
-            btnStartGame.setVisibility(View.GONE);
-        }else{
-            btnMainToAll.setVisibility(View.VISIBLE);
-            btnMainToOwn.setVisibility(View.VISIBLE);
-            btnStartGame.setVisibility(View.VISIBLE);
-        }
     }
 
     //Launch Game when clicked
@@ -101,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Launch High Own High Scores when clicked
     protected void ShowMyHighScores(View view) {
-        Intent intent = new Intent(MainActivity.this, ShowOwnHighSCores.class);
+        Intent intent = new Intent(MainActivity.this, ShowOwnHighScores.class);
         startActivity(intent);
     }
 

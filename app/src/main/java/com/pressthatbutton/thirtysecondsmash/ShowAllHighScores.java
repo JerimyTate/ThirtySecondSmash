@@ -1,7 +1,6 @@
 package com.pressthatbutton.thirtysecondsmash;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +48,7 @@ public class ShowAllHighScores extends AppCompatActivity {
 
         Toast.makeText(getBaseContext(), "Loading All High Scores...", Toast.LENGTH_LONG);
         try {
+            _scores.clear();
             ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
             query.orderByDescending("score");
             query.setLimit(100);
@@ -57,7 +57,7 @@ public class ShowAllHighScores extends AppCompatActivity {
                 public void done(List<Score> list, ParseException e) {
                     if (e == null) {
                         Log.d("MyApp","ShowAllHighScores Score List size: "+list.size());
-                        _scores = list;
+                        _scores.addAll(list);
                     } else {
                         Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
                         e.printStackTrace();
@@ -75,7 +75,7 @@ public class ShowAllHighScores extends AppCompatActivity {
     //Launch Own High Scores when clicked
     private void ShowMyHighScores(View view)
     {
-        Intent intent = new Intent(ShowAllHighScores.this, ShowOwnHighSCores.class);
+        Intent intent = new Intent(ShowAllHighScores.this, ShowOwnHighScores.class);
         startActivity(intent);
         super.finish();
     }
