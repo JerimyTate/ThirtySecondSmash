@@ -20,7 +20,7 @@ import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowOwnHighScores extends AppCompatActivity {
+public class ShowOwnHighSCores extends AppCompatActivity {
     public Button btnOwnToMain;
     public Button btnOwnToAll;
 
@@ -78,7 +78,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
     //Launch All High Scores when clicked
     private void ShowAllHighScores(View view)
     {
-        Intent intent = new Intent(ShowOwnHighScores.this, ShowAllHighScores.class);
+        Intent intent = new Intent(ShowOwnHighSCores.this, ShowAllHighScores.class);
         startActivity(intent);
         super.finish();
     }
