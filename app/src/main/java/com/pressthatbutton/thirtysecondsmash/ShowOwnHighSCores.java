@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.AllScoresAdapter;
@@ -55,14 +56,14 @@ public class ShowOwnHighScores extends AppCompatActivity {
             _scores.clear();
             ParseQuery<Score> query = ParseQuery.getQuery("Score");
             query.orderByDescending("score");
-            query.whereMatchesQuery("pointer-column-to-_User",
-                    parseUser.getQuery().whereEqualTo("username",parseUser.getUsername()));
+            query.whereMatchesQuery("owner",
+                    parseUser.getQuery().whereEqualTo("username", parseUser.getUsername()));
             query.setLimit(100);
             query.findInBackground(new FindCallback<Score>() {
                 @Override
                 public void done(List<Score> list, ParseException e) {
                     if (e == null) {
-                        Log.d("MyApp","ShowOwnHighScores Score List size: "+list.size());
+                        Log.d("MyApp", "ShowOwnHighScores Score List size: " + list.size());
                         _scores.addAll(list);
                     } else {
                         Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
