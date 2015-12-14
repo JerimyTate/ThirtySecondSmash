@@ -179,6 +179,14 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(parseUser!= null || parseUser.isAuthenticated()){
+            logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
+        }
+    }
+
     private void saveNewUser(final boolean isNew) {
         parseUser = ParseUser.getCurrentUser();
         parseUser.setUsername(email);
@@ -193,13 +201,15 @@ public class LoginScreen extends AppCompatActivity {
                     e.printStackTrace();
                 } else if (parseUser.isAuthenticated()) {
                     //Object saved successfully.
+
                     if (isNew) {
                         Toast.makeText(LoginScreen.this, "New user, " + parseUser.getUsername() + ", signed up.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(LoginScreen.this, "Returning user, " + parseUser.getUsername() + ", successfully logged in.", Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Log.d("MyApp","LoginScreen saveNewUser(). ParseUser session token: "+parseUser.getSessionToken());
+                    Log.d("MyApp","LoginScreen saveNewUser(). ParseUser session token: "+parseUser.getSessionToken()+
+                            ". IsAuthenticated: "+parseUser.isAuthenticated());
                 }
             }
         });

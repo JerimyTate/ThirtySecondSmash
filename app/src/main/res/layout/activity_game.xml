@@ -38,7 +38,6 @@
                 android:text="30"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/fragment_game_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -63,7 +62,6 @@
                 android:text="0"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/fragment_highest_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

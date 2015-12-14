@@ -3,13 +3,26 @@ package com.pressthatbutton.thirtysecondsmash;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.pressthatbutton.thirtysecondsmash.UserScore.AllScoresAdapter;
+import com.pressthatbutton.thirtysecondsmash.UserScore.OwnScoreAdapter;
+import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
+
+import java.util.List;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
@@ -20,6 +33,7 @@ public class GameActivity extends AppCompatActivity {
     int minusOneID;
 
     public static int gameScore;
+    public ParseUser parseUser;
 
     ///////////////SETTINGS///////////////////
     //settings for determining how often button will switch
@@ -34,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView countdown_number;
     private TextView _value;
+    private TextView high_score;
 
     public int _counter = 0;
     private String _stringVal;
@@ -53,6 +68,39 @@ public class GameActivity extends AppCompatActivity {
         plusOneID = plusOneSound.load(this, R.raw.plusone, 1);
         minusOneID = minusOneSound.load(this, R.raw.minusone, 1);
 
+        high_score = (TextView)findViewById(R.id.txt_highest_score);
+        AsyncTask<Void,Void,Void> asyncLoadHighestScore = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    parseUser = ParseUser.getCurrentUser();
+                    ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
+                    query.addDescendingOrder("score");
+                    query.whereEqualTo("owner", parseUser);
+                    query.setLimit(1);
+                    query.findInBackground(new FindCallback<Score>() {
+                        @Override
+                        public void done(List<Score> list, ParseException e) {
+                            if (e == null) {
+                                if(list.size()>0){
+                                    high_score.setText(list.get(0).getScore());
+                                }else{
+                                    Log.d("MyApp", "Empty. GameActivity ParseQuery findInBackground. No scores recorded.");
+                                }
+                            } else {
+                                Log.d("MyApp", "Error! GameActivity ParseQuery findInBackground. ParseException code: " + e.getCode());
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }catch (Exception e){
+                    Log.d("MyApp", "GameActivity ParseQuery Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        asyncLoadHighestScore.execute();
 
         _value = (TextView) findViewById(R.id.txt_game_score);
         countdown_number = (TextView) findViewById(R.id.txt_countdown_number);

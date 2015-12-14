@@ -16,6 +16,7 @@ import com.parse.ParseQuery;
 import com.pressthatbutton.thirtysecondsmash.UserScore.AllScoresAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowAllHighScores extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class ShowAllHighScores extends AppCompatActivity {
     public Button btnAllToOwn;
 
     public ListView lvAllScores;
-    private List<Score> _scores = null;
+    private static List<Score> _scores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +47,11 @@ public class ShowAllHighScores extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(getBaseContext(), "Loading All Scores...", Toast.LENGTH_LONG);
+        Toast.makeText(getBaseContext(), "Loading All High Scores...", Toast.LENGTH_LONG);
         try {
             ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
             query.addDescendingOrder("score");
+            query.setLimit(100);
             query.findInBackground(new FindCallback<Score>() {
                 @Override
                 public void done(List<Score> list, ParseException e) {

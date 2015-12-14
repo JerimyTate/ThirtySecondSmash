@@ -29,8 +29,12 @@ public class AppParse extends Application {
         ParseObject.registerSubclass(Score.class);
         ParseObject.registerSubclass(ParseUser.class);
 
-        _parseUser = new ParseUser();
-        _parseUser.setUsername("Unknown User");
+        if(ParseUser.getCurrentUser()==null){
+            _parseUser = new ParseUser();
+            _parseUser.setUsername("Unknown User");
+        }else{
+            _parseUser = ParseUser.getCurrentUser();
+        }
 
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseUser.enableRevocableSessionInBackground();
