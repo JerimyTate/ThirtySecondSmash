@@ -10,37 +10,39 @@ import android.widget.TextView;
 
 import com.pressthatbutton.thirtysecondsmash.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllScoresAdapter extends ArrayAdapter<Score> {
     public static final int LIST_MENU_ITEM_LAYOUT = android.support.design.R.layout.abc_list_menu_item_layout;
-    private final List<Score> _scores;
+    private static List<Score> _scores = new ArrayList<>();
     private static Context _context;
+    private static TextView txtAllScoresItem;
+    private static TextView txtAllScoresItemOwner;
 
     public AllScoresAdapter(Context context, int resource, List<Score> scores) {
         super(context, resource, scores);
         _context = context;
-        this._scores = scores;
+        _scores.clear();
+        _scores = scores;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(_context);
-
+        convertView = LayoutInflater.from(_context).inflate(LIST_MENU_ITEM_LAYOUT, parent, false);
         //All High Scores
-        View scoreAllItemView = inflater.inflate(LIST_MENU_ITEM_LAYOUT,parent,false);
+        txtAllScoresItem = (TextView) convertView.findViewById(R.id.txt_all_scores_item);
+        txtAllScoresItemOwner = (TextView) convertView.findViewById(R.id.txt_all_scores_item_user_name);
 
         //For AllHighScores
         try {
-            TextView txtAllScoresItem = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item);
             txtAllScoresItem.setText(_scores.get(position).getScore().toString());
-            TextView txtAllScoresItemOwner = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item_user_name);
-            txtAllScoresItemOwner.setText(_scores.get(position).getOwner().getUsername());
+            txtAllScoresItemOwner.setText(_scores.get(position).getOwner().fetchIfNeeded().getUsername());
         }catch (Exception e){
             Log.d("MyApp", "AllScoresAdapter Error: "+e.getMessage());
             e.printStackTrace();
         }
 
-        return scoreAllItemView;
+        return convertView;
     }
 }

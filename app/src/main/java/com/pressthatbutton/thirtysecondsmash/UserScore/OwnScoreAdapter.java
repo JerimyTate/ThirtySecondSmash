@@ -10,35 +10,36 @@ import android.widget.TextView;
 
 import com.pressthatbutton.thirtysecondsmash.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OwnScoreAdapter extends ArrayAdapter<Score> {
     public static final int LIST_MENU_ITEM_LAYOUT = android.support.design.R.layout.abc_list_menu_item_layout;
-    private final List<Score> _scores;
+    private static List<Score> _scores = new ArrayList<>();
     private static Context _context;
+    private TextView txtOwnScoreItem;
 
     public OwnScoreAdapter(Context context, int resource, List<Score> scores) {
         super(context, resource, scores);
         _context = context;
-        this._scores = scores;
+        _scores = scores;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(_context);
+        convertView = LayoutInflater.from(_context).inflate(LIST_MENU_ITEM_LAYOUT, parent, false);
 
         //Own High Scores
-        View scoreOwnItemView = inflater.inflate(LIST_MENU_ITEM_LAYOUT,parent,false);
+        txtOwnScoreItem = (TextView) convertView.findViewById(R.id.txt_own_score_item);
 
         //For OwnHighScores
         try {
-            TextView txtOwnScoreItem = (TextView) scoreOwnItemView.findViewById(R.id.txt_own_score_item);
-            txtOwnScoreItem.setText(_scores.get(position).getScore().toString());
+            txtOwnScoreItem.setText( _scores.get(position).getScore().toString());
         }catch (Exception e){
             Log.d("MyApp","OwnScoreAdapter Error: "+e.getMessage());
             e.printStackTrace();
         }
 
-        return scoreOwnItemView;
+        return convertView;
     }
 }
