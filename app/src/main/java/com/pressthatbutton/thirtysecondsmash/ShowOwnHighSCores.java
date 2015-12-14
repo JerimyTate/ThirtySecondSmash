@@ -61,7 +61,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
 
         try {
             lvOwnScores = (ListView) findViewById(R.id.own_score_list_view);
-            ParseQueryAdapter<Score> parseQueryAdapter = new ParseQueryAdapter<Score>(this,new ParseQueryAdapter.QueryFactory<Score>(){
+            ParseQueryAdapter<Score> parseQueryAdapter = new ParseQueryAdapter<>(this,new ParseQueryAdapter.QueryFactory<Score>(){
                 public ParseQuery<Score> create(){
                     ParseQuery<Score> query = new ParseQuery("Score");
                     query.orderByDescending("score");

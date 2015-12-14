@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.parse.ParseException;
 import com.parse.ParseQueryAdapter;
 
 import java.util.ArrayList;
@@ -66,8 +67,14 @@ public class AllScoresAdapter extends ParseQueryAdapter<Score> {
                     "Your object views must have a TextView whose id attribute is 'android.R.id.text2'", ex);
         }
         if (textView2 != null) {
+            String Name = "Unknown User";
+            try {
+                Name = object.getOwner().fetchIfNeeded().getUsername();
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
             if (this.textKey2 == null) {
-                textView2.setText(object.getOwner().getUsername());
+                textView2.setText(Name);
             } else if (object.get(this.textKey2) != null) {
                 textView2.setText(object.get(this.textKey2).toString());
             } else {
@@ -83,14 +90,14 @@ public class AllScoresAdapter extends ParseQueryAdapter<Score> {
         TextView textView2 = new TextView(context);
         textView2.setId(android.R.id.text2);
         textView2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+                50));
         textView2.setPadding(8, 4, 0, 0);
         view.addView(textView2);
 
         TextView textView = new TextView(context);
         textView.setId(android.R.id.text1);
         textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+                50));
         textView.setPadding(8, 0, 0, 4);
         view.addView(textView);
 
