@@ -25,7 +25,7 @@ public class OwnScoreAdapter extends ArrayAdapter<Score> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(_context);
 
         //Own High Scores
         View scoreOwnItemView = inflater.inflate(LIST_MENU_ITEM_LAYOUT,parent,false);
@@ -33,7 +33,7 @@ public class OwnScoreAdapter extends ArrayAdapter<Score> {
         //For OwnHighScores
         try {
             TextView txtOwnScoreItem = (TextView) scoreOwnItemView.findViewById(R.id.txt_own_score_item);
-            txtOwnScoreItem.setText(_scores.get(position).getScore());
+            txtOwnScoreItem.setText(_scores.get(position).getScore().toString());
         }catch (Exception e){
             Log.d("MyApp","OwnScoreAdapter Error: "+e.getMessage());
             e.printStackTrace();

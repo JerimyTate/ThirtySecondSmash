@@ -33,7 +33,7 @@ public class AllScoresAdapter extends ArrayAdapter<Score> {
         //For AllHighScores
         try {
             TextView txtAllScoresItem = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item);
-            txtAllScoresItem.setText(_scores.get(position).getScore());
+            txtAllScoresItem.setText(_scores.get(position).getScore().toString());
             TextView txtAllScoresItemOwner = (TextView) scoreAllItemView.findViewById(R.id.txt_all_scores_item_user_name);
             txtAllScoresItemOwner.setText(_scores.get(position).getOwner().getUsername());
         }catch (Exception e){
