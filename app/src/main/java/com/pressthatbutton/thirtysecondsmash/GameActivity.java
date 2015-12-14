@@ -39,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
     //settings for determining how often button will switch
     public int minPercent = 0;
     public int maxPercent = 100;
-    public int percentSwitch = 15;
+    public int percentSwitch = 10;
 
     //variables to load game length
     public int GameTime = 30000; //milliseconds
