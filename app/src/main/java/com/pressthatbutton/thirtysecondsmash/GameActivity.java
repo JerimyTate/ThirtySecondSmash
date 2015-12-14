@@ -85,7 +85,7 @@ public class GameActivity extends AppCompatActivity {
                             Log.d("MyApp", "GameActivity, returned Score List size (should be 1 or 0): " + list.size());
                             if (e == null) {
                                 if(list.size()>0){
-                                    high_score.setText(list.get(0).getScore());
+                                    high_score.setText(list.get(0).getScore().toString());
                                 }else{
                                     Log.d("MyApp", "Empty. GameActivity ParseQuery findInBackground. No scores recorded.");
                                 }

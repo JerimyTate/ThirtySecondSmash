@@ -15,15 +15,17 @@ import java.util.List;
 public class OwnScoreAdapter extends ArrayAdapter<Score> {
     public static final int LIST_MENU_ITEM_LAYOUT = android.support.design.R.layout.abc_list_menu_item_layout;
     private final List<Score> _scores;
+    private static Context _context;
 
     public OwnScoreAdapter(Context context, int resource, List<Score> scores) {
         super(context, resource, scores);
+        _context = context;
         this._scores = scores;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater)convertView.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //Own High Scores
         View scoreOwnItemView = inflater.inflate(LIST_MENU_ITEM_LAYOUT,parent,false);
