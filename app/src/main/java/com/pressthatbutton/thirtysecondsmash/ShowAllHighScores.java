@@ -56,6 +56,7 @@ public class ShowAllHighScores extends AppCompatActivity {
                 @Override
                 public void done(List<Score> list, ParseException e) {
                     if (e == null) {
+                        Log.d("MyApp","ShowAllHighScores Score List size: "+list.size());
                         _scores = list;
                     } else {
                         Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);

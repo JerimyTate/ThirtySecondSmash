@@ -1,11 +1,16 @@
 package com.pressthatbutton.thirtysecondsmash;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseSession;
 import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
@@ -26,11 +31,15 @@ public class AppParse extends Application {
         ParseObject.registerSubclass(Score.class);
         ParseObject.registerSubclass(ParseUser.class);
 
-        _parseUser = new ParseUser();
-        _parseUser.setUsername("Unknown User");
-
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseUser.enableRevocableSessionInBackground();
+
+        if(ParseUser.getCurrentUser()==null){
+            _parseUser = new ParseUser();
+            _parseUser.setUsername("Unknown User");
+        }else{
+            _parseUser = ParseUser.getCurrentUser();
+        }
 
         ParseFacebookUtils.initialize(this);
 

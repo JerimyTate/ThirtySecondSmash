@@ -22,6 +22,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.parse.LogInCallback;
+import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
@@ -36,6 +37,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button btnLogin;
     private Button btnFacebook;
     private Button btnSignUp;
+    private Button btnLogOut;
     public static LinearLayout ll_log_in_components;
 
     protected String email;
@@ -60,9 +62,39 @@ public class LoginScreen extends AppCompatActivity {
         password = (EditText) findViewById(R.id.edit_txt_password);
         ll_log_in_components = (LinearLayout)findViewById(R.id.container_log_in_components);
 
+        btnLogOut = (Button)findViewById(R.id.btn_sign_out);
+        btnLogOut.setVisibility(View.GONE);
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOutInBackground(new LogOutCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if(e!=null){
+                            Toast.makeText(LoginScreen.this, "Error Logging Out. ParseException code: "+e.getCode(), Toast.LENGTH_LONG).show();
+                            Log.d("MyApp","Error! LoginScreen ParseUser.logOutInBackground. ParseException code: "+e.getCode());
+                            e.printStackTrace();
+                        }else{
+                            Toast.makeText(LoginScreen.this, "Successfully Logged Out!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+                            startActivity(intent);
+                            logInStatus.setText("You are currently Logged Out.");
+                            btnLogOut.setVisibility(View.GONE);
+                            ll_log_in_components.setVisibility(View.VISIBLE);
+                            finish();
+                        }
+                    }
+                });
+            }
+        });
+
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
         if(parseUser!= null || parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
+            if(parseUser.isAuthenticated()) {
+                ll_log_in_components.setVisibility(View.GONE);
+                btnLogOut.setVisibility(View.VISIBLE);
+            }
         }
 
         //Filters out characters that are not letters or digits
@@ -184,6 +216,10 @@ public class LoginScreen extends AppCompatActivity {
         super.onPostResume();
         if(parseUser!= null || parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
+            if(parseUser.isAuthenticated()) {
+                ll_log_in_components.setVisibility(View.GONE);
+                btnLogOut.setVisibility(View.VISIBLE);
+            }
         }
     }
 
