@@ -1,26 +1,103 @@
 package com.pressthatbutton.thirtysecondsmash.UserScore;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.pressthatbutton.thirtysecondsmash.R;
+import com.parse.ParseQueryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllScoresAdapter extends ArrayAdapter<Score> {
+public class AllScoresAdapter extends ParseQueryAdapter<Score> {
     public static final int LIST_MENU_ITEM_LAYOUT = android.support.design.R.layout.abc_list_menu_item_layout;
-    private static List<Score> _scores = new ArrayList<>();
+    private List<Score> _scores = new ArrayList<>();
     private static Context _context;
     private static TextView txtAllScoresItem;
     private static TextView txtAllScoresItemOwner;
+    private String textKey2;
+    private String textKey;
 
-    public AllScoresAdapter(Context context, int resource, List<Score> scores) {
+    @Override
+    public void setTextKey(String textKey) {
+        this.textKey = textKey;
+    }
+
+    public void setTextKey2(String textKey2) {
+        this.textKey2 = textKey2;
+    }
+
+    public AllScoresAdapter(Context context, QueryFactory<Score> queryFactory) {
+        super(context, queryFactory);
+        _context = context;
+    }
+
+    @Override
+    public View getItemView(Score object, View v, ViewGroup parent) {
+        if (v == null) {
+            v = this.getDefaultView2(_context);
+        }
+
+        TextView textView;
+        try {
+            textView = (TextView) v.findViewById(android.R.id.text1);
+        } catch (ClassCastException ex) {
+            throw new IllegalStateException(
+                    "Your object views must have a TextView whose id attribute is 'android.R.id.text1'", ex);
+        }
+
+        if (textView != null) {
+            if (this.textKey == null) {
+                textView.setText(object.getObjectId());
+            } else if (object.get(this.textKey) != null) {
+                textView.setText(object.get(this.textKey).toString());
+            } else {
+                textView.setText(null);
+            }
+        }
+
+        TextView textView2;
+        try {
+            textView2 = (TextView) v.findViewById(android.R.id.text2);
+        } catch (ClassCastException ex) {
+            throw new IllegalStateException(
+                    "Your object views must have a TextView whose id attribute is 'android.R.id.text2'", ex);
+        }
+        if (textView2 != null) {
+            if (this.textKey2 == null) {
+                textView2.setText(object.getOwner().getUsername());
+            } else if (object.get(this.textKey2) != null) {
+                textView2.setText(object.get(this.textKey2).toString());
+            } else {
+                textView2.setText(null);
+            }
+        }
+        return v;
+    }
+    private View getDefaultView2(Context context) {
+        LinearLayout view = new LinearLayout(context);
+        view.setPadding(8, 4, 8, 4);
+
+        TextView textView2 = new TextView(context);
+        textView2.setId(android.R.id.text2);
+        textView2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView2.setPadding(8, 4, 0, 0);
+        view.addView(textView2);
+
+        TextView textView = new TextView(context);
+        textView.setId(android.R.id.text1);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setPadding(8, 0, 0, 4);
+        view.addView(textView);
+
+        return view;
+    }
+
+/*public AllScoresAdapter(Context context, int resource, List<Score> scores) {
         super(context, resource, scores);
         _context = context;
         _scores.clear();
@@ -44,5 +121,5 @@ public class AllScoresAdapter extends ArrayAdapter<Score> {
         }
 
         return convertView;
-    }
+    }*/
 }

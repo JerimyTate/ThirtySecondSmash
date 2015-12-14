@@ -47,7 +47,7 @@ public class ShowAllHighScores extends AppCompatActivity {
         });
 
         try {
-            ParseQueryAdapter<Score> parseQueryAdapter = new ParseQueryAdapter<Score>(this,new ParseQueryAdapter.QueryFactory<Score>(){
+            AllScoresAdapter parseQueryAdapter = new AllScoresAdapter(this,new ParseQueryAdapter.QueryFactory<Score>(){
                 public ParseQuery<Score> create(){
                     ParseQuery<Score> query = new ParseQuery("Score");
                     query.orderByDescending("score");
@@ -55,6 +55,7 @@ public class ShowAllHighScores extends AppCompatActivity {
                 }
             });
             parseQueryAdapter.setTextKey("score");
+            parseQueryAdapter.setTextKey2("owner");
             parseQueryAdapter.setPaginationEnabled(true);
             parseQueryAdapter.setObjectsPerPage(10);
             lvAllScores = (ListView) findViewById(R.id.all_score_list_view);
