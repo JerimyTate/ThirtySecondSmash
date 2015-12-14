@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*if(!parseUser.isAuthenticated()){
+        if(!parseUser.isAuthenticated()){
             btnMainToAll.setVisibility(View.GONE);
             btnMainToOwn.setVisibility(View.GONE);
             btnStartGame.setVisibility(View.GONE);
@@ -70,7 +70,21 @@ public class MainActivity extends AppCompatActivity {
             btnMainToAll.setVisibility(View.VISIBLE);
             btnMainToOwn.setVisibility(View.VISIBLE);
             btnStartGame.setVisibility(View.VISIBLE);
-        }*/
+        }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(!parseUser.isAuthenticated()){
+            btnMainToAll.setVisibility(View.GONE);
+            btnMainToOwn.setVisibility(View.GONE);
+            btnStartGame.setVisibility(View.GONE);
+        }else{
+            btnMainToAll.setVisibility(View.VISIBLE);
+            btnMainToOwn.setVisibility(View.VISIBLE);
+            btnStartGame.setVisibility(View.VISIBLE);
+        }
     }
 
     //Launch Game when clicked

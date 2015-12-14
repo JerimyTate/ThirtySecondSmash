@@ -31,14 +31,15 @@ public class AppParse extends Application {
         ParseObject.registerSubclass(Score.class);
         ParseObject.registerSubclass(ParseUser.class);
 
-        _parseUser = ParseUser.getCurrentUser();
-        if(_parseUser==null){
-            _parseUser = new ParseUser();
-            _parseUser.setUsername("Unknown User");
-        }
-
         Parse.initialize(this, ApplicationID, ClientKey);
         ParseUser.enableRevocableSessionInBackground();
+
+        if(ParseUser.getCurrentUser()==null){
+            _parseUser = new ParseUser();
+            _parseUser.setUsername("Unknown User");
+        }else{
+            _parseUser = ParseUser.getCurrentUser();
+        }
 
         ParseFacebookUtils.initialize(this);
 

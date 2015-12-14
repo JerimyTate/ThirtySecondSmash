@@ -105,5 +105,13 @@
                 android:text="Log In"/>
         </LinearLayout>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/btn_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightRed"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#fff"
+        android:text="Log Out"/>
 </LinearLayout>
