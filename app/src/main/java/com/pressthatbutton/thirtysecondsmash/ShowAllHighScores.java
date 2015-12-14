@@ -59,7 +59,7 @@ public class ShowAllHighScores extends AppCompatActivity {
                         Log.d("MyApp","ShowAllHighScores Score List size: "+list.size());
                         _scores.addAll(list);
                     } else {
-                        Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
+                        Log.d("MyApp","Error! ShowAllHighScores findInBackground ParseException code: " + e.getCode());
                         e.printStackTrace();
                     }
                 }
