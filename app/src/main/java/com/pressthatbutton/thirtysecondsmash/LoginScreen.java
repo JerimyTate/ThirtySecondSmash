@@ -75,11 +75,12 @@ public class LoginScreen extends AppCompatActivity {
                             Log.d("MyApp","Error! LoginScreen ParseUser.logOutInBackground. ParseException code: "+e.getCode());
                             e.printStackTrace();
                         }else{
-                            btnLogOut.setVisibility(View.GONE);
-                            ll_log_in_components.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginScreen.this, "Successfully Logged Out!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
+                            logInStatus.setText("You are currently Logged Out.");
+                            btnLogOut.setVisibility(View.GONE);
+                            ll_log_in_components.setVisibility(View.VISIBLE);
                             finish();
                         }
                     }
