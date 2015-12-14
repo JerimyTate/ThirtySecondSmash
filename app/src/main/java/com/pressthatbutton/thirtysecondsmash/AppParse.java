@@ -8,6 +8,7 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParseSession;
 import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
@@ -27,11 +28,17 @@ public class AppParse extends Application {
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Score.class);
         ParseObject.registerSubclass(ParseUser.class);
-        _parseUser = new ParseUser();
-        _parseUser.setUsername("Unknown User");
-        _parseUser.getSessionToken();
+
+        if(ParseUser.getCurrentUser()==null){
+            _parseUser = new ParseUser();
+            _parseUser.setUsername("Unknown User");
+        }else{
+            _parseUser = ParseUser.getCurrentUser();
+        }
 
         Parse.initialize(this, ApplicationID, ClientKey);
+        ParseUser.enableRevocableSessionInBackground();
+
         ParseFacebookUtils.initialize(this);
 
         ParseInstallation.getCurrentInstallation().saveInBackground();

@@ -61,7 +61,7 @@ public class LoginScreen extends AppCompatActivity {
         ll_log_in_components = (LinearLayout)findViewById(R.id.container_log_in_components);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
-        if(parseUser!= null && parseUser.isAuthenticated()){
+        if(parseUser!= null || parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
         }
 
@@ -146,35 +146,45 @@ public class LoginScreen extends AppCompatActivity {
                 //Calls method FieldsAreEmpty() that returns a boolean.
                 if (!FieldsAreEmpty()) {
                     //Fields are not empty
-                    final ProgressDialog dlg = new ProgressDialog(LoginScreen.this);
-                    dlg.setTitle("Hold up!");
-                    dlg.setMessage("We are logging you in... Chill");
-                    dlg.show();
+                    Toast.makeText(LoginScreen.this, "Hold up!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, "We are logging you in... Chill", Toast.LENGTH_LONG).show();
                     ParseUser.logInInBackground(userName.getText().toString(), password.getText().toString(), new LogInCallback() {
                         @Override
                         public void done(ParseUser parseUser, ParseException e) {
                             if (e == null && parseUser != null) {
                                 //Login Successful
-                                dlg.setProgress(100);
-                                dlg.dismiss();
+                                parseUser = ParseUser.getCurrentUser();
+                                Toast.makeText(LoginScreen.this, "Welcome, "+parseUser.getUsername()+"!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             } else if (parseUser == null) {
                                 //Username or Password is invalid
                                 Toast.makeText(LoginScreen.this, "Username and/or Password does not match Parse's records.", Toast.LENGTH_LONG).show();
-                            } else {
+                            } else if (e!=null){
                                 //An error occurred.
+                                Log.d("MyApp","Error! LoginScreen ParseUser.logInInBackground. ParseException code: "+e.getCode());
                                 e.printStackTrace();
+                            }else{
+                                //???
+                                Log.d("MyApp","Other Event. LoginScreen ParseUser.logInInBackground. ParseUser isAuthenticated: "+parseUser.isAuthenticated()+
+                                        ". Session token: "+parseUser.getSessionToken()+".");
                             }
                         }
                     });
-                    dlg.dismiss();
                 } else {
                     //Fields are empty, Do Nothing.
                 }
             }
         });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(parseUser!= null || parseUser.isAuthenticated()){
+            logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
+        }
     }
 
     private void saveNewUser(final boolean isNew) {
@@ -191,13 +201,15 @@ public class LoginScreen extends AppCompatActivity {
                     e.printStackTrace();
                 } else if (parseUser.isAuthenticated()) {
                     //Object saved successfully.
+
                     if (isNew) {
                         Toast.makeText(LoginScreen.this, "New user, " + parseUser.getUsername() + ", signed up.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(LoginScreen.this, "Returning user, " + parseUser.getUsername() + ", successfully logged in.", Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Log.d("MyApp","LoginScreen saveNewUser(). ParseUser session token: "+parseUser.getSessionToken());
+                    Log.d("MyApp","LoginScreen saveNewUser(). ParseUser session token: "+parseUser.getSessionToken()+
+                            ". IsAuthenticated: "+parseUser.isAuthenticated());
                 }
             }
         });

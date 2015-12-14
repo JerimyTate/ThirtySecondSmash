@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -80,18 +81,25 @@ public class SignUpFragment extends Fragment{
                     //Not empty field
                     parseUser.setUsername(edit_txt_username.getText().toString());
                     parseUser.setPassword(edit_txt_password.getText().toString());
+                    Log.d("MyApp","ParseUser SessionToken: " +parseUser.getSessionToken()+". ParseUser isAuthenticated: "+parseUser.isAuthenticated());
                     parseUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
                             if (e == null || parseUser.isAuthenticated()) {
                                 Toast.makeText(getContext(), "Signed up as " + parseUser.getUsername(), Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getContext(),MainActivity.class);
+                                Intent intent = new Intent(getContext(), MainActivity.class);
                                 startActivity(intent);
                                 getActivity().finish();
-                            } else {
-                                Toast.makeText(getContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG).show();
+                            } else if (e != null) {
+                                if(e.getCode()==ParseException.USERNAME_TAKEN){
+                                    Toast.makeText(getContext(),"Username "+edit_txt_username.getText().toString()+" is already taken.",Toast.LENGTH_LONG).show();
+                                }else{
+                                    Toast.makeText(getContext(),"ParseException code: "+e.getCode(),Toast.LENGTH_LONG).show();
+                                }
                                 Log.d("MyApp", "Error! ParseException code: " + e.getCode());
                                 e.printStackTrace();
+                            } else {
+                                Log.d("MyApp", "SignUpFragment signUpInBackground. ParseUser name: " + parseUser.getUsername() + ". Session token: " + parseUser.getSessionToken());
                             }
                         }
                     });
@@ -109,10 +117,10 @@ public class SignUpFragment extends Fragment{
     }
 
     private void hideFragment(){
-        LoginScreen.ll_log_in_components.setVisibility(View.VISIBLE);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.container_signup_fragment));
         fragmentTransaction.commit();
+        LoginScreen.ll_log_in_components.setVisibility(View.VISIBLE);
     }
 }

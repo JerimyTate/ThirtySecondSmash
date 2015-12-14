@@ -17,6 +17,7 @@ import com.pressthatbutton.thirtysecondsmash.UserScore.AllScoresAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.OwnScoreAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowOwnHighScores extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
     public ParseUser parseUser = AppParse._parseUser;
 
     public ListView lvOwnScores;
-    private List<Score> _scores = null;
+    private static List<Score> _scores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +50,17 @@ public class ShowOwnHighScores extends AppCompatActivity {
             }
         });
 
-        parseUser = ParseUser.getCurrentUser();
-
         Toast.makeText(getBaseContext(), "Loading Own Scores...", Toast.LENGTH_LONG);
         try {
             ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
+            query.addDescendingOrder("score");
+            query.whereEqualTo("owner",parseUser);
+            query.setLimit(100);
             query.findInBackground(new FindCallback<Score>() {
                 @Override
                 public void done(List<Score> list, ParseException e) {
                     if (e == null) {
-                        for (Score s : list) {
-                            if (s.getOwner().getUsername().compareTo(parseUser.getUsername()) == 0) {
-                                _scores.add(s);
-                            }
-                        }
+                        _scores = list;
                     } else {
                         Toast.makeText(getBaseContext(), "Error! ParseException code: " + e.getCode(), Toast.LENGTH_LONG);
                         e.printStackTrace();
