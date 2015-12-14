@@ -1,7 +1,6 @@
 package com.pressthatbutton.thirtysecondsmash;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,7 +74,7 @@ public class ShowAllHighScores extends AppCompatActivity {
     //Launch Own High Scores when clicked
     private void ShowMyHighScores(View view)
     {
-        Intent intent = new Intent(ShowAllHighScores.this, ShowOwnHighSCores.class);
+        Intent intent = new Intent(ShowAllHighScores.this, ShowOwnHighScores.class);
         startActivity(intent);
         super.finish();
     }
