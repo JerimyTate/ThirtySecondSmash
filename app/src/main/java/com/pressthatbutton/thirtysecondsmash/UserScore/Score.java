@@ -8,10 +8,6 @@ import com.parse.ParseUser;
 @ParseClassName("Score")
 public class Score extends ParseObject {
 
-    public Score() {
-        setScore(0);
-    }
-
     public void setOwner(ParseUser currentUser){
         put("owner", currentUser);
     }

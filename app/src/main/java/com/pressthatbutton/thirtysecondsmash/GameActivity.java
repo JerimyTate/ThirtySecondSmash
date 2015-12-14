@@ -76,12 +76,13 @@ public class GameActivity extends AppCompatActivity {
                     parseUser = ParseUser.getCurrentUser();
                     ParseQuery<Score> query = ParseQuery.getQuery("Score");
                     query.orderByDescending("score");
-                    query.whereMatchesQuery("pointer-column-to-_User",
+                    query.whereMatchesQuery("owner",
                             parseUser.getQuery().whereEqualTo("username",parseUser.getUsername()));
                     query.setLimit(1);
                     query.findInBackground(new FindCallback<Score>() {
                         @Override
                         public void done(List<Score> list, ParseException e) {
+                            Log.d("MyApp", "GameActivity, returned Score List size (should be 1 or 0): " + list.size());
                             if (e == null) {
                                 if(list.size()>0){
                                     high_score.setText(list.get(0).getScore());
