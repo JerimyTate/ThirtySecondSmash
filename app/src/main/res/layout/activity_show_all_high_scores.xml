@@ -31,22 +31,10 @@
             android:background="@color/colorLightGreen"
             android:textSize="20sp"
             android:paddingLeft="10dp"
+            android:layout_marginRight="2dp"
             android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="Name"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorLightGreen"
-            android:textSize="20sp"
-            android:paddingLeft="10dp"
-            android:layout_marginRight="2dp"
-            android:layout_weight="2"
             android:text="Score"/>
     </LinearLayout>
-
     <ListView
         android:id="@+id/all_score_list_view"
         android:layout_width="match_parent"
