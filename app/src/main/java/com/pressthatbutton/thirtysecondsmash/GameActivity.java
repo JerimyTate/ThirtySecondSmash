@@ -75,8 +75,8 @@ public class GameActivity extends AppCompatActivity {
                 try {
                     parseUser = ParseUser.getCurrentUser();
                     ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
-                    query.addDescendingOrder("score");
-                    query.whereEqualTo("owner", parseUser);
+                    query.orderByDescending("score");
+                    query.whereContains("owner", parseUser.getObjectId());
                     query.setLimit(1);
                     query.findInBackground(new FindCallback<Score>() {
                         @Override

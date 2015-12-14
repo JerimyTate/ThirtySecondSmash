@@ -53,8 +53,8 @@ public class ShowOwnHighScores extends AppCompatActivity {
         Toast.makeText(getBaseContext(), "Loading Own Scores...", Toast.LENGTH_LONG);
         try {
             ParseQuery<Score> query = ParseQuery.getQuery(Score.class);
-            query.addDescendingOrder("score");
-            query.whereEqualTo("owner",parseUser);
+            query.orderByDescending("score");
+            query.whereContains("owner",parseUser.getObjectId());
             query.setLimit(100);
             query.findInBackground(new FindCallback<Score>() {
                 @Override
