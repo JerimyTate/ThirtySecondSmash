@@ -66,7 +66,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
                     ParseQuery<Score> query = new ParseQuery("Score");
                     query.orderByDescending("score");
                     query.whereMatchesQuery("owner",
-                            parseUser.getQuery().whereEqualTo("username", parseUser.getUsername()));
+                            parseUser.getQuery().whereEqualTo("username", ParseUser.getCurrentUser().getUsername()));
                     return query;
                 }
             });
