@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
     public int percentSwitch = 15;
 
     //variables to load game length
-    public int GameTime = 5000; //milliseconds
+    public int GameTime = 30000; //milliseconds
     public int DecrementRate = 1000; //milliseconds
     ///////////////SETTINGS///////////////////
 
