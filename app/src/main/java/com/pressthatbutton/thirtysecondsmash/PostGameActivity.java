@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
@@ -32,6 +34,7 @@ public class PostGameActivity extends AppCompatActivity {
         LastGameScore.setText(_stringVal);
 
         try {
+            parseUser = ParseUser.getCurrentUser();
             score = new Score();
             score.setOwner(parseUser);
             score.setScore(GameActivity.gameScore);
@@ -41,11 +44,11 @@ public class PostGameActivity extends AppCompatActivity {
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("MyApp", "Score saved. User is " + score.getOwner() + ". Score is: " + score.getScore());
-                    } else if (e!=null) {
+                    } else if (e != null) {
                         Log.d("MyApp", "SaveCallBack Error! Score not saved. ParseException code: " + e.getCode());
                         e.printStackTrace();
-                    }else{
-                        Log.d("MyApp","PostGameActivity score.saveInBackground. Other.");
+                    } else {
+                        Log.d("MyApp", "PostGameActivity score.saveInBackground. Other.");
                     }
                 }
             });

@@ -91,6 +91,11 @@ public class SignUpFragment extends Fragment{
                                 startActivity(intent);
                                 getActivity().finish();
                             } else if (e != null) {
+                                if(e.getCode()==ParseException.USERNAME_TAKEN){
+                                    Toast.makeText(getContext(),"Username "+edit_txt_username.getText().toString()+" is already taken.",Toast.LENGTH_LONG).show();
+                                }else{
+                                    Toast.makeText(getContext(),"ParseException code: "+e.getCode(),Toast.LENGTH_LONG).show();
+                                }
                                 Log.d("MyApp", "Error! ParseException code: " + e.getCode());
                                 e.printStackTrace();
                             } else {
