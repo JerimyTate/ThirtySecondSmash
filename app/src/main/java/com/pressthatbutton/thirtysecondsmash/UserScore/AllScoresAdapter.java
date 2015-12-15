@@ -69,7 +69,7 @@ public class AllScoresAdapter extends ParseQueryAdapter<Score> {
         if (textView2 != null) {
             String Name = "Unknown User";
             try {
-                Name = object.getOwner().fetch().getUsername() + ": ";
+                Name = object.getOwner().fetch().getUsername();
             }catch (ParseException e){
                 e.printStackTrace();
             }
