@@ -69,7 +69,7 @@ public class AllScoresAdapter extends ParseQueryAdapter<Score> {
         if (textView2 != null) {
             String Name = "Unknown User";
             try {
-                Name = object.getOwner().fetch().getUsername();
+                Name = object.getOwner().fetch().getUsername() + ": ";
             }catch (ParseException e){
                 e.printStackTrace();
             }
@@ -92,7 +92,7 @@ public class AllScoresAdapter extends ParseQueryAdapter<Score> {
             if (this.textKey == null) {
                 textView3.setText(object.getObjectId());
             } else if (object.get(this.textKey) != null) {
-                textView3.setText(String.format("{0}", object.getScore()));
+                textView3.setText(object.getScore().toString());
             } else {
                 textView3.setText(null);
             }
@@ -114,7 +114,7 @@ public class AllScoresAdapter extends ParseQueryAdapter<Score> {
         textView3.setId(R.id.txt_all_scores_item);
         textView3.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        textView3.setPadding(8, 0, 0, 4);
+        textView3.setPadding(8, 10, 0, 4);
         view.addView(textView3);
 
         TextView textView = new TextView(context);
