@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.AllScoresAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
@@ -46,8 +47,19 @@ public class ShowAllHighScores extends AppCompatActivity {
         });
 
         try {
+            AllScoresAdapter parseQueryAdapter = new AllScoresAdapter(this,new ParseQueryAdapter.QueryFactory<Score>(){
+                public ParseQuery<Score> create(){
+                    ParseQuery<Score> query = new ParseQuery("Score");
+                    query.orderByDescending("score");
+                    return query;
+                }
+            });
+            parseQueryAdapter.setTextKey("score");
+            parseQueryAdapter.setTextKey2("owner");
+            parseQueryAdapter.setPaginationEnabled(true);
+            parseQueryAdapter.setObjectsPerPage(10);
             lvAllScores = (ListView) findViewById(R.id.all_score_list_view);
-            all_scores_list.clear();
+            /*all_scores_list.clear();
             ParseQuery<Score> query = ParseQuery.getQuery("Score");
             query.orderByDescending("score");
             query.setLimit(10);
@@ -62,8 +74,8 @@ public class ShowAllHighScores extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            });
-            lvAllScores.setAdapter(new AllScoresAdapter(getBaseContext(), AllScoresAdapter.LIST_MENU_ITEM_LAYOUT, all_scores_list));
+            });*/
+            lvAllScores.setAdapter(parseQueryAdapter);
         }catch (Exception e){
             Log.d("MyApp","ShowAllHighScore ParseQuery Error: "+e.getMessage());
             e.printStackTrace();

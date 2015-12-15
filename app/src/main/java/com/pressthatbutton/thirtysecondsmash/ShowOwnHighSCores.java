@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.OwnScoreAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
@@ -60,7 +61,20 @@ public class ShowOwnHighScores extends AppCompatActivity {
 
         try {
             lvOwnScores = (ListView) findViewById(R.id.own_score_list_view);
-            own_scores_list.clear();
+            ParseQueryAdapter<Score> parseQueryAdapter = new ParseQueryAdapter<>(this,new ParseQueryAdapter.QueryFactory<Score>(){
+                public ParseQuery<Score> create(){
+                    ParseQuery<Score> query = new ParseQuery("Score");
+                    query.orderByDescending("score");
+                    query.whereMatchesQuery("owner",
+                            parseUser.getQuery().whereEqualTo("username", ParseUser.getCurrentUser().getUsername()));
+                    return query;
+                }
+            });
+            parseQueryAdapter.setTextKey("score");
+            parseQueryAdapter.setObjectsPerPage(10);
+            parseQueryAdapter.setPaginationEnabled(true);
+
+            /*own_scores_list.clear();
             ParseQuery<Score> query = ParseQuery.getQuery("Score");
             query.orderByDescending("score");
             query.whereMatchesQuery("owner",
@@ -77,7 +91,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            });
+            });*/
             lvOwnScores.setAdapter(new OwnScoreAdapter(getBaseContext(), OwnScoreAdapter.LIST_MENU_ITEM_LAYOUT, own_scores_list));
         }catch (Exception e){
             Log.d("MyApp", "ShowOwnHighScore ParseQuery Error: " + e.getMessage());
