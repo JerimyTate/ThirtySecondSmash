@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
@@ -56,20 +57,24 @@ public class ShowOwnHighScores extends AppCompatActivity {
 
         try {
             parseUser = ParseUser.getCurrentUser();
-            lvOwnScores = (ListView) findViewById(R.id.own_score_list_view);
-            OwnScoreAdapter parseQueryAdapter = new OwnScoreAdapter(this,new ParseQueryAdapter.QueryFactory<Score>(){
-                public ParseQuery<Score> create(){
-                    ParseQuery<Score> query = new ParseQuery("Score");
-                    query.orderByDescending("score");
-                    query.whereEqualTo("owner",parseUser);
-                    return query;
-                }
-            });
-            parseQueryAdapter.setTextKey("score");
-            parseQueryAdapter.setObjectsPerPage(12);
-            parseQueryAdapter.setPaginationEnabled(true);
+            if(parseUser!= null) {
+                lvOwnScores = (ListView) findViewById(R.id.own_score_list_view);
+                OwnScoreAdapter parseQueryAdapter = new OwnScoreAdapter(this, new ParseQueryAdapter.QueryFactory<Score>() {
+                    public ParseQuery<Score> create() {
+                        ParseQuery<Score> query = new ParseQuery("Score");
+                        query.orderByDescending("score");
+                        query.whereEqualTo("owner", parseUser);
+                        return query;
+                    }
+                });
+                parseQueryAdapter.setTextKey("score");
+                parseQueryAdapter.setObjectsPerPage(12);
+                parseQueryAdapter.setPaginationEnabled(true);
 
-            lvOwnScores.setAdapter(parseQueryAdapter);
+                lvOwnScores.setAdapter(parseQueryAdapter);
+            }else{
+                Toast.makeText(ShowOwnHighScores.this, "You are not logged in.", Toast.LENGTH_SHORT).show();
+            }
         }catch (Exception e){
             Log.d("MyApp", "ShowOwnHighScore ParseQuery Error: " + e.getMessage());
             e.printStackTrace();
