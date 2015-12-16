@@ -80,19 +80,23 @@ public class LoginScreen extends AppCompatActivity {
                 ParseUser.logOutInBackground(new LogOutCallback() {
                     @Override
                     public void done(ParseException e) {
+                        parseUser = ParseUser.getCurrentUser();
                         if(e!=null){
                             Toast.makeText(LoginScreen.this, "Error Logging Out. ParseException code: "+e.getCode(), Toast.LENGTH_LONG).show();
                             Log.d("MyApp","Error! LoginScreen ParseUser.logOutInBackground. ParseException code: "+e.getCode());
                             e.printStackTrace();
-                        }else{
+                        }else if(parseUser == null){
                             logInStatus.setText("You are currently Logged Out.");
-                            parseUser = ParseUser.getCurrentUser();
                             btnLogOut.setVisibility(View.GONE);
                             ll_log_in_components.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginScreen.this, "Successfully Logged Out!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+                        }else{
+                            ll_log_in_components.setVisibility(View.VISIBLE);
+                            Toast.makeText(LoginScreen.this, "ParseUser is not null.", Toast.LENGTH_SHORT).show();
+                            Log.d("MyApp","LoginScreen ParseUser.logOutInBackground(). parseUser.getUsername(): "+parseUser.getUsername());
                         }
                     }
                 });
