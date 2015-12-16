@@ -9,16 +9,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.pressthatbutton.thirtysecondsmash.UserScore.OwnScoreAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.Score;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShowOwnHighScores extends AppCompatActivity {
     private Button btnOwnToMain;
@@ -28,7 +24,6 @@ public class ShowOwnHighScores extends AppCompatActivity {
     public ParseUser parseUser = ParseUser.getCurrentUser();
 
     public ListView lvOwnScores;
-    private static List<Score> own_scores_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,39 +55,21 @@ public class ShowOwnHighScores extends AppCompatActivity {
         });
 
         try {
+            parseUser = ParseUser.getCurrentUser();
             lvOwnScores = (ListView) findViewById(R.id.own_score_list_view);
-            ParseQueryAdapter<Score> parseQueryAdapter = new ParseQueryAdapter<>(this,new ParseQueryAdapter.QueryFactory<Score>(){
+            OwnScoreAdapter parseQueryAdapter = new OwnScoreAdapter(this,new ParseQueryAdapter.QueryFactory<Score>(){
                 public ParseQuery<Score> create(){
                     ParseQuery<Score> query = new ParseQuery("Score");
                     query.orderByDescending("score");
-                    query.whereMatchesQuery("owner",
-                            parseUser.getQuery().whereEqualTo("username", ParseUser.getCurrentUser().getUsername()));
+                    query.whereEqualTo("owner",parseUser);
                     return query;
                 }
             });
             parseQueryAdapter.setTextKey("score");
-            parseQueryAdapter.setObjectsPerPage(10);
+            parseQueryAdapter.setObjectsPerPage(20);
             parseQueryAdapter.setPaginationEnabled(true);
 
-            /*own_scores_list.clear();
-            ParseQuery<Score> query = ParseQuery.getQuery("Score");
-            query.orderByDescending("score");
-            query.whereMatchesQuery("owner",
-                    parseUser.getQuery().whereEqualTo("username", parseUser.getUsername()));
-            query.setLimit(10);
-            query.findInBackground(new FindCallback<Score>() {
-                @Override
-                public void done(List<Score> list, ParseException e) {
-                    if (e == null) {
-                        Log.d("MyApp", "ShowOwnHighScores Score List size: " + list.size());
-                        own_scores_list.addAll(list);
-                    } else {
-                        Log.d("MyApp", "Error! ShowOwnHighScores findInBackground ParseException code: " + e.getCode());
-                        e.printStackTrace();
-                    }
-                }
-            });*/
-            lvOwnScores.setAdapter(new OwnScoreAdapter(getBaseContext(), OwnScoreAdapter.LIST_MENU_ITEM_LAYOUT, own_scores_list));
+            lvOwnScores.setAdapter(parseQueryAdapter);
         }catch (Exception e){
             Log.d("MyApp", "ShowOwnHighScore ParseQuery Error: " + e.getMessage());
             e.printStackTrace();

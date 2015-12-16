@@ -187,6 +187,7 @@ public class LoginScreen extends AppCompatActivity {
                             if (e == null && parseUser != null) {
                                 //Login Successful
                                 parseUser = ParseUser.getCurrentUser();
+                                parseUser.setUsername(userName.getText().toString());
                                 logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
                                 if(parseUser.isAuthenticated()) {
                                     ll_log_in_components.setVisibility(View.GONE);

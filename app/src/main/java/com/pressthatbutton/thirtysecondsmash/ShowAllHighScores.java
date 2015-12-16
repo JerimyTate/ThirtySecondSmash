@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.pressthatbutton.thirtysecondsmash.UserScore.AllScoresAdapter;
@@ -23,7 +21,6 @@ public class ShowAllHighScores extends AppCompatActivity {
     public Button btnAllToOwn;
 
     public ListView lvAllScores;
-    private static List<Score> all_scores_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,24 +54,8 @@ public class ShowAllHighScores extends AppCompatActivity {
             parseQueryAdapter.setTextKey("score");
             parseQueryAdapter.setTextKey2("owner");
             parseQueryAdapter.setPaginationEnabled(true);
-            parseQueryAdapter.setObjectsPerPage(10);
+            parseQueryAdapter.setObjectsPerPage(20);
             lvAllScores = (ListView) findViewById(R.id.all_score_list_view);
-            /*all_scores_list.clear();
-            ParseQuery<Score> query = ParseQuery.getQuery("Score");
-            query.orderByDescending("score");
-            query.setLimit(10);
-            query.findInBackground(new FindCallback<Score>() {
-                @Override
-                public void done(List<Score> list, ParseException e) {
-                    if (e == null) {
-                        Log.d("MyApp", "ShowAllHighScores Score List size: " + list.size());
-                        all_scores_list.addAll(list);
-                    } else {
-                        Log.d("MyApp", "Error! ShowAllHighScores findInBackground ParseException code: " + e.getCode());
-                        e.printStackTrace();
-                    }
-                }
-            });*/
             lvAllScores.setAdapter(parseQueryAdapter);
         }catch (Exception e){
             Log.d("MyApp","ShowAllHighScore ParseQuery Error: "+e.getMessage());
