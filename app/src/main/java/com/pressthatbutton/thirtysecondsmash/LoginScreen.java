@@ -66,12 +66,12 @@ public class LoginScreen extends AppCompatActivity {
         btnLogOut.setVisibility(View.GONE);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
-        if(parseUser!= null || parseUser.isAuthenticated()){
+        if(parseUser== null){
+            logInStatus.setText("You are currently Logged Out.");
+        }else if(parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
-            if(parseUser.isAuthenticated()) {
-                ll_log_in_components.setVisibility(View.GONE);
-                btnLogOut.setVisibility(View.VISIBLE);
-            }
+            ll_log_in_components.setVisibility(View.GONE);
+            btnLogOut.setVisibility(View.VISIBLE);
         }
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
@@ -80,19 +80,23 @@ public class LoginScreen extends AppCompatActivity {
                 ParseUser.logOutInBackground(new LogOutCallback() {
                     @Override
                     public void done(ParseException e) {
+                        parseUser = ParseUser.getCurrentUser();
                         if(e!=null){
                             Toast.makeText(LoginScreen.this, "Error Logging Out. ParseException code: "+e.getCode(), Toast.LENGTH_LONG).show();
                             Log.d("MyApp","Error! LoginScreen ParseUser.logOutInBackground. ParseException code: "+e.getCode());
                             e.printStackTrace();
-                        }else{
+                        }else if(parseUser == null){
                             logInStatus.setText("You are currently Logged Out.");
-                            parseUser.setUsername("Unknown User");
                             btnLogOut.setVisibility(View.GONE);
                             ll_log_in_components.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginScreen.this, "Successfully Logged Out!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+                        }else{
+                            ll_log_in_components.setVisibility(View.VISIBLE);
+                            Toast.makeText(LoginScreen.this, "ParseUser is not null.", Toast.LENGTH_SHORT).show();
+                            Log.d("MyApp","LoginScreen ParseUser.logOutInBackground(). parseUser.getUsername(): "+parseUser.getUsername());
                         }
                     }
                 });
@@ -187,6 +191,7 @@ public class LoginScreen extends AppCompatActivity {
                             if (e == null && parseUser != null) {
                                 //Login Successful
                                 parseUser = ParseUser.getCurrentUser();
+                                parseUser.setUsername(userName.getText().toString());
                                 logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
                                 if(parseUser.isAuthenticated()) {
                                     ll_log_in_components.setVisibility(View.GONE);
@@ -220,12 +225,12 @@ public class LoginScreen extends AppCompatActivity {
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
-        if(parseUser!= null || parseUser.isAuthenticated()){
+        if(parseUser== null){
+            logInStatus.setText("You are currently Logged Out.");
+        }else if(parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
-            if(parseUser.isAuthenticated()) {
-                ll_log_in_components.setVisibility(View.GONE);
-                btnLogOut.setVisibility(View.VISIBLE);
-            }
+            ll_log_in_components.setVisibility(View.GONE);
+            btnLogOut.setVisibility(View.VISIBLE);
         }
         super.onPostCreate(savedInstanceState);
     }
@@ -265,7 +270,7 @@ public class LoginScreen extends AppCompatActivity {
                 try{
                     email = response.getJSONObject().getString("email");
                     //Print everything in Log debug
-                    Log.d("MyApp",response.getRawResponse());
+                    Log.d("MyApp","LoginScreen getUserDetailsFromFB. Email: "+email);
                 }
                 catch (JSONException e){
                     e.printStackTrace();
