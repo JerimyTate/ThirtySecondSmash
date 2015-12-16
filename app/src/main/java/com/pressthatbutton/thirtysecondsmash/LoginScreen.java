@@ -66,12 +66,12 @@ public class LoginScreen extends AppCompatActivity {
         btnLogOut.setVisibility(View.GONE);
 
         logInStatus = (TextView) findViewById(R.id.txt_login_status);
-        if(parseUser!= null || parseUser.isAuthenticated()){
+        if(parseUser== null){
+            logInStatus.setText("You are currently Logged Out.");
+        }else if(parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
-            if(parseUser.isAuthenticated()) {
-                ll_log_in_components.setVisibility(View.GONE);
-                btnLogOut.setVisibility(View.VISIBLE);
-            }
+            ll_log_in_components.setVisibility(View.GONE);
+            btnLogOut.setVisibility(View.VISIBLE);
         }
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class LoginScreen extends AppCompatActivity {
                             e.printStackTrace();
                         }else{
                             logInStatus.setText("You are currently Logged Out.");
-                            parseUser.setUsername("Unknown User");
+                            parseUser = ParseUser.getCurrentUser();
                             btnLogOut.setVisibility(View.GONE);
                             ll_log_in_components.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginScreen.this, "Successfully Logged Out!", Toast.LENGTH_LONG).show();
@@ -221,12 +221,12 @@ public class LoginScreen extends AppCompatActivity {
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
-        if(parseUser!= null || parseUser.isAuthenticated()){
+        if(parseUser== null){
+            logInStatus.setText("You are currently Logged Out.");
+        }else if(parseUser.isAuthenticated()){
             logInStatus.setText("Currently logged in as "+parseUser.getUsername()+".");
-            if(parseUser.isAuthenticated()) {
-                ll_log_in_components.setVisibility(View.GONE);
-                btnLogOut.setVisibility(View.VISIBLE);
-            }
+            ll_log_in_components.setVisibility(View.GONE);
+            btnLogOut.setVisibility(View.VISIBLE);
         }
         super.onPostCreate(savedInstanceState);
     }
@@ -266,7 +266,7 @@ public class LoginScreen extends AppCompatActivity {
                 try{
                     email = response.getJSONObject().getString("email");
                     //Print everything in Log debug
-                    Log.d("MyApp",response.getRawResponse());
+                    Log.d("MyApp","LoginScreen getUserDetailsFromFB. Email: "+email);
                 }
                 catch (JSONException e){
                     e.printStackTrace();
