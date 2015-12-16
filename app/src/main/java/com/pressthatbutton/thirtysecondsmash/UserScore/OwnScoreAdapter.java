@@ -50,7 +50,7 @@ public class OwnScoreAdapter extends ParseQueryAdapter<Score> {
         //Score
         TextView textView2;
         try {
-            textView2 = (TextView) v.findViewById(R.id.txt_all_scores_item);
+            textView2 = (TextView) v.findViewById(R.id.txt_own_score_item);
         } catch (ClassCastException ex) {
             throw new IllegalStateException(
                     "Your object views must have a TextView whose id attribute is 'R.id.txt_own_score_item'", ex);

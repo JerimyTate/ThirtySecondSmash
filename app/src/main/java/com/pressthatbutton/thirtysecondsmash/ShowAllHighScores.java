@@ -54,7 +54,7 @@ public class ShowAllHighScores extends AppCompatActivity {
             parseQueryAdapter.setTextKey("score");
             parseQueryAdapter.setTextKey2("owner");
             parseQueryAdapter.setPaginationEnabled(true);
-            parseQueryAdapter.setObjectsPerPage(20);
+            parseQueryAdapter.setObjectsPerPage(12);
             lvAllScores = (ListView) findViewById(R.id.all_score_list_view);
             lvAllScores.setAdapter(parseQueryAdapter);
         }catch (Exception e){

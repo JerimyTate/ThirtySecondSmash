@@ -66,7 +66,7 @@ public class ShowOwnHighScores extends AppCompatActivity {
                 }
             });
             parseQueryAdapter.setTextKey("score");
-            parseQueryAdapter.setObjectsPerPage(20);
+            parseQueryAdapter.setObjectsPerPage(12);
             parseQueryAdapter.setPaginationEnabled(true);
 
             lvOwnScores.setAdapter(parseQueryAdapter);
